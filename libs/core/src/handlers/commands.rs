@@ -205,10 +205,9 @@ slu_commands_declaration! {
         show_desktop(),
 
     RequestToUserInputShortcut =
-        @webview()
         @async()
         @fallible()
-        request_to_user_input_shortcut(callback_event: String),
+        request_to_user_input_shortcut() -> Option<Vec<String>>,
 
     CheckForUpdates =
         @async()
@@ -531,9 +530,6 @@ slu_commands_declaration! {
     WlanForget =
         @fallible()
         wlan_forget(ssid: String),
-    GetNetworkDefaultLocalIp =
-        @fallible()
-        get_network_default_local_ip() -> String,
     GetNetworkAdapters =
         @fallible()
         get_network_adapters() -> Vec<NetworkAdapter>,
@@ -557,7 +553,7 @@ slu_commands_declaration! {
         set_system_tray_icon_promoted(id: String, promoted: bool),
     SetSystemTrayIconsOrder =
         @fallible()
-        set_system_tray_icons_order(keys: Vec<String>),
+        set_system_tray_icons_order(ids: Vec<String>),
 
     // Notifications
     GetNotifications = get_notifications() -> Vec<AppNotification>,

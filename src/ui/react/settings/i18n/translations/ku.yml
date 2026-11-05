@@ -375,6 +375,7 @@ wall:
   saturation: Satutionation
   seconds: seconds
   select_collection: Hilbijêre Collection
+  show_paused_message: Peyama rawestandî nîşan bide
   thumbnail_generation_complete: Nifşa Thumbnail Biqede
   thumbnail_generation_finished: Çêkirina pîçikan bi serfirazî qediya
   use_accent_color: Rengê devoka dîwarê dîwar bikar bînin
@@ -383,7 +384,6 @@ wall:
   wallpapers: Wallpapers
   wallpapers_and_collections: Wallpaper & Collections
   withOverlay: Bi sernav
-  workspace_collections: Koleksiyonên Cihê Xebatê
 weg:
   auto_hide: Auto Hide
   auto_hide_touch_disabled: Veşartina otomatîkî li ser cîhazên ekrana destikê peyda nabe
@@ -448,6 +448,7 @@ welcome:
     pêşve bibe.
   title: Hûn bi xêr hatin Seelen UI!
 widget:
+  add_workspace_override: Li ser cîhek xebatê hilweşînin
   default_instance: Mînaka Bingehîn
   default_instance_hint: Her gav çalak e, veavakirina widgeta root bikar tîne
   enable: Vê widgetê çalak bikin
@@ -455,6 +456,11 @@ widget:
   extra_instances: Mînakên Zêdeyî
   instance: Mînak
   instances: Mînak
+  remove_workspace_override: Rexnegiriyê rake (ji çavdêriyê mîras bigire)
+  select_workspace: Cihek xebatê hilbijêrin
+  workspace_fallback_name: Sermaseya {{0}}
+  workspace_overrides: Cihê xebatê serûbin dike
+  workspace_row: Rêz {{0}}
 wm:
   animations:
     duration: Demjimêr anîmasyon (MS)

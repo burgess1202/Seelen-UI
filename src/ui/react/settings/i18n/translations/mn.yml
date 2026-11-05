@@ -374,6 +374,7 @@ wall:
   saturation: Цэнгэхны бэлтгэл, төгсөг
   seconds: хоёр цаг
   select_collection: Цуглуулга сонгоно уу
+  show_paused_message: Түр зогсоосон мессежийг харуулах
   thumbnail_generation_complete: Өнгөц зураг үүсгэж дууслаа
   thumbnail_generation_finished: Өнгөц зураг үүсгэх ажиллагаа амжилттай дууслаа
   use_accent_color: Ханын цаасны өргөлтийн өнгийг ашигла
@@ -382,7 +383,6 @@ wall:
   wallpapers: Дэлгэцийн зураг
   wallpapers_and_collections: Дэлгэцийн зураг ба цуглуулга
   withOverlay: Давхцаж байна
-  workspace_collections: Ажлын талбарын цуглуулга
 weg:
   auto_hide: Авто гүнд
   auto_hide_touch_disabled: Мэдрэгч дэлгэцтэй төхөөрөмжүүд дээр автоматаар нуух боломжгүй
@@ -446,6 +446,7 @@ welcome:
     санал хүсэлт төслийг хөгжүүлэх, сайжруулахад тусална.
   title: Seelen UI-д тавтай морил!
 widget:
+  add_workspace_override: Ажлын талбар дээр дарж бичих
   default_instance: Өгөгдмөл жишээ
   default_instance_hint: Үргэлж идэвхтэй, үндсэн виджетийн тохиргоог ашигладаг
   enable: Энэ виджетийг идэвхжүүлэх
@@ -453,6 +454,11 @@ widget:
   extra_instances: Нэмэлт тохиолдлууд
   instance: Жишээ
   instances: Саналууд
+  remove_workspace_override: Хүчингүй болгохыг арилгах (монитороос өвлүүлэх)
+  select_workspace: Ажлын талбарыг сонгоно уу
+  workspace_fallback_name: Ширээний компьютер {{0}}
+  workspace_overrides: Ажлын талбарыг хүчингүй болгодог
+  workspace_row: '{{0}} мөр'
 wm:
   animations:
     duration: Хөдөлгөөнт давталт (MS)

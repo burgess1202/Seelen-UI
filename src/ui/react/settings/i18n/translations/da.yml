@@ -372,6 +372,7 @@ wall:
   saturation: Mætning
   seconds: sekunder
   select_collection: Vælg Samling
+  show_paused_message: Vis pauseret besked
   thumbnail_generation_complete: Generering af miniaturebilleder er fuldført
   thumbnail_generation_finished: Generering af miniaturebilleder er afsluttet
   use_accent_color: Brug tapet accentfarve
@@ -380,7 +381,6 @@ wall:
   wallpapers: Baggrunde
   wallpapers_and_collections: Baggrunde og samlinger
   withOverlay: Med overlay
-  workspace_collections: Arbejdsrumssamlinger
 weg:
   auto_hide: Auto skjul
   auto_hide_touch_disabled: Automatisk skjul er ikke tilgængelig på enheder med berøringsskærm
@@ -443,6 +443,7 @@ welcome:
     i butikken – din feedback hjælper projektet med at vokse og forbedre.
   title: Velkommen til Seelen UI!
 widget:
+  add_workspace_override: Tilsidesæt på et arbejdsområde
   default_instance: Standardinstans
   default_instance_hint: Altid aktiv, bruger root-widget-konfigurationen
   enable: Aktivér denne widget
@@ -450,6 +451,11 @@ widget:
   extra_instances: Ekstra Forekomster
   instance: Forekomst
   instances: Forekomster
+  remove_workspace_override: Fjern tilsidesættelse (arv fra monitor)
+  select_workspace: Vælg et arbejdsområde
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Arbejdsområde tilsidesætter
+  workspace_row: Række {{0}}
 wm:
   animations:
     duration: Animationsvarighed (MS)

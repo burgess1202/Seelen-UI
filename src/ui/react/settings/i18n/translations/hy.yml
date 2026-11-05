@@ -376,6 +376,7 @@ wall:
   saturation: Հագեցում
   seconds: վայրկյան
   select_collection: Ընտրեք Հավաքածու
+  show_paused_message: Ցույց տալ դադարեցված հաղորդագրությունը
   thumbnail_generation_complete: Մանրապատկերների ստեղծումն ավարտված է
   thumbnail_generation_finished: Մանրապատկերների ստեղծումը հաջողությամբ ավարտվեց
   use_accent_color: Օգտագործեք պաստառի շեշտադրման գույնը
@@ -384,7 +385,6 @@ wall:
   wallpapers: Պաստառներ
   wallpapers_and_collections: Պաստառներ և հավաքածուներ
   withOverlay: Ծածկով
-  workspace_collections: Աշխատանքային տարածքների հավաքածուներ
 weg:
   auto_hide: Ավտոմատ թաքցնել
   auto_hide_touch_disabled: Ավտոմատ թաքցնելը հասանելի չէ սենսորային էկրանով սարքերում
@@ -448,6 +448,7 @@ welcome:
     թողնելու մասին. ձեր կարծիքն օգնում է նախագծի զարգացմանն ու կատարելագործմանը:
   title: 'Բարի գալուստ Seelen UI:'
 widget:
+  add_workspace_override: Չեղարկել աշխատանքային տարածքը
   default_instance: Կանխադրված օրինակ
   default_instance_hint: Միշտ ակտիվ է, օգտագործում է արմատային վիջեթի կազմաձևը
   enable: Միացրեք այս հարմարանքը
@@ -455,6 +456,11 @@ widget:
   extra_instances: Լրացուցիչ դեպքեր
   instance: Օրինակ
   instances: Դեպքեր
+  remove_workspace_override: Հեռացնել անտեսումը (ժառանգել մոնիտորից)
+  select_workspace: Ընտրեք աշխատանքային տարածք
+  workspace_fallback_name: Աշխատասեղան {{0}}
+  workspace_overrides: Աշխատանքային տարածքը անտեսում է
+  workspace_row: Տող {{0}}
 wm:
   animations:
     duration: Անիմացիայի տեւողությունը (MS)

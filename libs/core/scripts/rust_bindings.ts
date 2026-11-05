@@ -1,5 +1,15 @@
 /// <reference lib="deno.ns" />
 
+async function checked(command: string, args: string[], piped = false): Promise<Deno.CommandOutput> {
+  const result = await new Deno.Command(command, {
+    args,
+    stderr: "inherit",
+    stdout: piped ? "piped" : "inherit",
+  }).output();
+  if (!result.success) throw new Error(`${command} failed (${result.code}); SDK generation stopped`);
+  return result;
+}
+
 await Deno.mkdir("./gen/types", { recursive: true });
 // await Deno.mkdir('./src/validators', { recursive: true });
 
@@ -21,11 +31,7 @@ await Deno.mkdir(GenTypesPath, { recursive: true });
   // yeah cargo test generates the typescript bindings, why? ask to @aleph-alpha/ts-rs xd
   // btw internally we also decided to use tests to avoid having a binary.
   // also this gill generate the json schemas
-  await new Deno.Command("cargo", {
-    args: ["test", "--features", "gen-binds"],
-    stderr: "inherit",
-    stdout: "inherit",
-  }).output();
+  await checked("cargo", ["test", "--locked", "--offline", "-p", "seelen-core", "--features", "gen-binds"]);
 }
 
 /* {
@@ -70,11 +76,7 @@ await Deno.mkdir(GenTypesPath, { recursive: true });
 
 {
   console.log("[Task] Extracting Types Definitions...");
-  const doc = await new Deno.Command("deno", {
-    args: ["doc", "--json", "--private", `${GenTypesPath}/mod.ts`],
-    stderr: "inherit",
-    stdout: "piped",
-  }).output();
+  const doc = await checked("deno", ["doc", "--json", "--private", `${GenTypesPath}/mod.ts`], true);
   const docJson = JSON.parse(new TextDecoder().decode(doc.stdout));
   await Deno.writeTextFile(
     "./gen/doc-types.json",
@@ -84,11 +86,7 @@ await Deno.mkdir(GenTypesPath, { recursive: true });
 
 {
   console.log("[Task] Extracting Library Definitions...");
-  const doc2 = await new Deno.Command("deno", {
-    args: ["doc", "--json", "--private", libPath],
-    stderr: "inherit",
-    stdout: "piped",
-  }).output();
+  const doc2 = await checked("deno", ["doc", "--json", "--private", libPath], true);
   const docJson2 = JSON.parse(new TextDecoder().decode(doc2.stdout));
   await Deno.writeTextFile(
     "./gen/doc-lib.json",
@@ -97,14 +95,5 @@ await Deno.mkdir(GenTypesPath, { recursive: true });
 }
 
 console.log("[Task] Formatting...");
-await new Deno.Command("cargo", {
-  args: ["fmt"],
-  stderr: "inherit",
-  stdout: "inherit",
-}).output();
-await new Deno.Command("deno", {
-  args: ["fmt", "--quiet"],
-  stderr: "inherit",
-  stdout: "inherit",
-}).output();
+await checked("deno", ["fmt", "--quiet", "gen", "src/handlers/commands.ts", "src/handlers/events.ts"]);
 console.log("[Task] Done!");

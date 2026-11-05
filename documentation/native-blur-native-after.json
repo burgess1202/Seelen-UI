@@ -1,0 +1,197 @@
+{
+  "timestamp": "2026-10-20T06:22:11.965Z",
+  "profile": "unoptimized debug",
+  "note": "CPU submission and exact resource-operation counts; not compositor/GPU completion time.",
+  "samples": [
+    {
+      "repetition": 0,
+      "results": [
+        {
+          "regions": 1,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 1889,
+          "updateUs": 274,
+          "paths": 40,
+          "brushes": 1,
+          "created": 1,
+          "dropped": 1
+        },
+        {
+          "regions": 8,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 546,
+          "updateUs": 2245,
+          "paths": 320,
+          "brushes": 8,
+          "created": 8,
+          "dropped": 8
+        },
+        {
+          "regions": 32,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 2771,
+          "updateUs": 6061,
+          "paths": 1280,
+          "brushes": 32,
+          "created": 32,
+          "dropped": 32
+        }
+      ]
+    },
+    {
+      "repetition": 1,
+      "results": [
+        {
+          "regions": 1,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 2039,
+          "updateUs": 346,
+          "paths": 40,
+          "brushes": 1,
+          "created": 1,
+          "dropped": 1
+        },
+        {
+          "regions": 8,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 912,
+          "updateUs": 1885,
+          "paths": 320,
+          "brushes": 8,
+          "created": 8,
+          "dropped": 8
+        },
+        {
+          "regions": 32,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 2505,
+          "updateUs": 8709,
+          "paths": 1280,
+          "brushes": 32,
+          "created": 32,
+          "dropped": 32
+        }
+      ]
+    },
+    {
+      "repetition": 2,
+      "results": [
+        {
+          "regions": 1,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 1817,
+          "updateUs": 191,
+          "paths": 40,
+          "brushes": 1,
+          "created": 1,
+          "dropped": 1
+        },
+        {
+          "regions": 8,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 620,
+          "updateUs": 1751,
+          "paths": 320,
+          "brushes": 8,
+          "created": 8,
+          "dropped": 8
+        },
+        {
+          "regions": 32,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 2734,
+          "updateUs": 8437,
+          "paths": 1280,
+          "brushes": 32,
+          "created": 32,
+          "dropped": 32
+        }
+      ]
+    },
+    {
+      "repetition": 3,
+      "results": [
+        {
+          "regions": 1,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 1665,
+          "updateUs": 241,
+          "paths": 40,
+          "brushes": 1,
+          "created": 1,
+          "dropped": 1
+        },
+        {
+          "regions": 8,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 676,
+          "updateUs": 2420,
+          "paths": 320,
+          "brushes": 8,
+          "created": 8,
+          "dropped": 8
+        },
+        {
+          "regions": 32,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 2917,
+          "updateUs": 8816,
+          "paths": 1280,
+          "brushes": 32,
+          "created": 32,
+          "dropped": 32
+        }
+      ]
+    },
+    {
+      "repetition": 4,
+      "results": [
+        {
+          "regions": 1,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 1606,
+          "updateUs": 227,
+          "paths": 40,
+          "brushes": 1,
+          "created": 1,
+          "dropped": 1
+        },
+        {
+          "regions": 8,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 545,
+          "updateUs": 1647,
+          "paths": 320,
+          "brushes": 8,
+          "created": 8,
+          "dropped": 8
+        },
+        {
+          "regions": 32,
+          "updates": 40,
+          "clips": 4,
+          "createUs": 1722,
+          "updateUs": 6655,
+          "paths": 1280,
+          "brushes": 32,
+          "created": 32,
+          "dropped": 32
+        }
+      ]
+    }
+  ]
+}

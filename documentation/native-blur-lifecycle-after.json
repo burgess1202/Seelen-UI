@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-20T06:22:12.047Z",
+  "profile": "unoptimized debug",
+  "note": "CPU submission and exact resource-operation counts; not compositor/GPU completion time.",
+  "samples": [],
+  "lifecycle": {
+    "created": 4000,
+    "cycles": 500,
+    "dropped": 4000,
+    "note": "Hidden HWND, private process memory; not VRAM or a long-term leak proof",
+    "samples": [
+      {
+        "cycle": 20,
+        "privateBytes": 2768896
+      },
+      {
+        "cycle": 100,
+        "privateBytes": 3039232
+      },
+      {
+        "cycle": 300,
+        "privateBytes": 3043328
+      },
+      {
+        "cycle": 500,
+        "privateBytes": 3104768
+      }
+    ]
+  }
+}

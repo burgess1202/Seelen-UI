@@ -1,0 +1,90 @@
+{
+  "timestamp": "2026-10-23T03:49:25.849Z",
+  "note": "Actual frontend code; mocked native/window IPC, not GPU pixels or a JS-stall GPU test.",
+  "results": [
+    {
+      "name": "blocked-ipc",
+      "passed": false,
+      "error": "page.evaluate: Error: Close never entered control lane\n    at assert (eval at evaluate (:311:30), <anonymous>:2:72)\n    at eval (eval at evaluate (:311:30), <anonymous>:13:11)",
+      "diagnostic": {
+        "time": 668.9000000059605,
+        "opacity": "0",
+        "animations": []
+      }
+    },
+    {
+      "name": "late-close-after-reopen",
+      "elapsedMs": 260.39999997615814,
+      "hideCalls": 1,
+      "controlMessages": 3,
+      "hideObservation": {
+        "time": 863.5999999940395,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "deadline-no-finish",
+      "elapsedMs": 91.39999997615814,
+      "hideCalls": 0,
+      "controlMessages": 1,
+      "passed": true
+    },
+    {
+      "name": "content-animation",
+      "elapsedMs": 110.59999999403954,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 496.69999998807907,
+        "opacity": "0",
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 109.65000000437719,
+            "endTime": 1500
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "repeated-hide-reopen",
+      "elapsedMs": 185.59999999403954,
+      "hideCalls": 0,
+      "controlMessages": 2,
+      "passed": true
+    },
+    {
+      "name": "no-native-theme",
+      "elapsedMs": 0.7999999821186066,
+      "hideCalls": 1,
+      "controlMessages": 0,
+      "hideObservation": {
+        "time": 337.40000000596046,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "long-close-watchdog",
+      "elapsedMs": 212.59999999403954,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 592,
+        "opacity": "0.802425",
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 197.5749999979828,
+            "endTime": 1000
+          }
+        ]
+      },
+      "passed": true
+    }
+  ]
+}

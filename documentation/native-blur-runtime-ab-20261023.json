@@ -1,0 +1,3755 @@
+{
+  "timestamp": "2026-10-23T03:09:22.6792623Z",
+  "restored": true,
+  "executableSha256": "33B49F318F36AD55FB8998579CD73560B9850713BDF88A12B75EC3825DC95790",
+  "commit": "507378aa01190617c18ee2c70ecc66b316169437",
+  "windows": {
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "gpus": [
+    {
+      "Name": "DeskIn Virtual Display Adapter",
+      "DriverVersion": "16.26.19.698",
+      "CurrentHorizontalResolution": null,
+      "CurrentVerticalResolution": null,
+      "CurrentRefreshRate": null
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 5070 Ti",
+      "DriverVersion": "32.0.16.1742",
+      "CurrentHorizontalResolution": 2560,
+      "CurrentVerticalResolution": 1440,
+      "CurrentRefreshRate": 210
+    }
+  ],
+  "cpu": {
+    "Name": "AMD Ryzen 5 7500F 6-Core Processor             ",
+    "NumberOfLogicalProcessors": 12
+  },
+  "scope": "Actual existing Toolbar .ft-bar, 18 CSS px blur, all other native and CSS backdrop blur disabled in both arms. Foreground theme retained. Debug executable. No claim of frame-time or pixel validation.",
+  "hardwareAcceleration": true,
+  "webviewGpuDisabledObserved": false,
+  "caveats": [
+    "Single physical machine, debug build, same live desktop; not all GPU vendors.",
+    "WMI engine counters are integer percentage samples; low utilization has limited resolution.",
+    "DWM is shared desktop activity. No engine percentages summed across different engines.",
+    "Attributed GPU memory counters are not physical total VRAM; allocations can be shared.",
+    "No pixel correctness, end-to-end latency, frame-time or long-term leak proof."
+  ],
+  "trials": [
+    {
+      "pair": 0,
+      "mode": "off",
+      "rounds": 35,
+      "seconds": 61.0480872,
+      "gpuTraceCaptured": false,
+      "groups": {
+        "Seelen-tree": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 6.3552622930654055,
+            "median": 6.294683821775066,
+            "p95": 8.456830236384032,
+            "min": 4.624869232353164,
+            "max": 9.083401086040379,
+            "first": 7.386330999676407,
+            "last": 6.270749012661597
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 1963.5983258928572,
+            "median": 1958.9609375,
+            "p95": 1973.83203125,
+            "min": 1954.99609375,
+            "max": 1975.51171875,
+            "first": 1970.62109375,
+            "last": 1958.68359375
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 119.75044642857142,
+            "median": 119.71875,
+            "p95": 120.02734375,
+            "min": 119.7109375,
+            "max": 120.02734375,
+            "first": 119.7109375,
+            "last": 119.71875
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 4.56640625,
+            "median": 4.56640625,
+            "p95": 4.56640625,
+            "min": 4.56640625,
+            "max": 4.56640625,
+            "first": 4.56640625,
+            "last": 4.56640625
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        },
+        "DWM-shared-desktop": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 645.74453125,
+            "median": 645.74609375,
+            "p95": 645.77734375,
+            "min": 645.60546875,
+            "max": 645.78125,
+            "first": 645.60546875,
+            "last": 645.7421875
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 16950.308705357143,
+            "median": 16950.3125,
+            "p95": 16950.3125,
+            "min": 16950.1796875,
+            "max": 16950.3125,
+            "first": 16950.1796875,
+            "last": 16950.3125
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 10.863058035714285,
+            "median": 10.90234375,
+            "p95": 10.90234375,
+            "min": 10.65234375,
+            "max": 10.90234375,
+            "first": 10.65234375,
+            "last": 10.80859375
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x000163CA_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_10_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_11_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_12_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_1_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_2_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_3_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_4_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_5_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_6_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_7_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_8_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_9_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0.34285714285714286,
+              "median": 0,
+              "p95": 1,
+              "min": 0,
+              "max": 4,
+              "first": 0,
+              "last": 1
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 0,
+      "mode": "on",
+      "rounds": 35,
+      "seconds": 60.5418915,
+      "gpuTraceCaptured": false,
+      "groups": {
+        "Seelen-tree": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 6.485357470212139,
+            "median": 6.371973100085393,
+            "p95": 8.148927499944785,
+            "min": 4.882937902723403,
+            "max": 8.992240602777652,
+            "first": 5.789962491769721,
+            "last": 7.193866550694379
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 2016.8561383928572,
+            "median": 2011.546875,
+            "p95": 2074.06640625,
+            "min": 2003.203125,
+            "max": 2076.17578125,
+            "first": 2076.17578125,
+            "last": 2007.7734375
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 123.93649553571429,
+            "median": 119.8515625,
+            "p95": 166.13671875,
+            "min": 119.8515625,
+            "max": 168.95703125,
+            "first": 166.13671875,
+            "last": 119.8515625
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 4.851674107142857,
+            "median": 4.69140625,
+            "p95": 6.51953125,
+            "min": 4.69140625,
+            "max": 6.64453125,
+            "first": 6.51953125,
+            "last": 4.69140625
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        },
+        "DWM-shared-desktop": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 659.1545758928571,
+            "median": 659.1796875,
+            "p95": 659.2109375,
+            "min": 659.01171875,
+            "max": 659.2109375,
+            "first": 659.078125,
+            "last": 659.2109375
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 16963.56640625,
+            "median": 16963.56640625,
+            "p95": 16963.56640625,
+            "min": 16963.56640625,
+            "max": 16963.56640625,
+            "first": 16963.56640625,
+            "last": 16963.56640625
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 10.80859375,
+            "median": 10.80859375,
+            "p95": 10.80859375,
+            "min": 10.80859375,
+            "max": 10.80859375,
+            "first": 10.80859375,
+            "last": 10.80859375
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x000163CA_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_10_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_11_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_12_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_1_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_2_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_3_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_4_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_5_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_6_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_7_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_8_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_9_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 1.2285714285714286,
+              "median": 1,
+              "p95": 2,
+              "min": 1,
+              "max": 4,
+              "first": 1,
+              "last": 4
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 1,
+      "mode": "on",
+      "rounds": 35,
+      "seconds": 60.5052239,
+      "gpuTraceCaptured": false,
+      "groups": {
+        "Seelen-tree": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 6.272400844281868,
+            "median": 6.1301731378637925,
+            "p95": 8.107133499194479,
+            "min": 4.432015490504112,
+            "max": 8.496058916158454,
+            "first": 6.423341918312051,
+            "last": 5.064820269677416
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 1994.2736607142858,
+            "median": 1973.4453125,
+            "p95": 2071.39453125,
+            "min": 1959.609375,
+            "max": 2071.99609375,
+            "first": 2068.04296875,
+            "last": 1959.609375
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 120.04732142857142,
+            "median": 120.02734375,
+            "p95": 120.33984375,
+            "min": 119.8359375,
+            "max": 120.34765625,
+            "first": 120.0234375,
+            "last": 119.83984375
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 4.69140625,
+            "median": 4.69140625,
+            "p95": 4.69140625,
+            "min": 4.69140625,
+            "max": 4.69140625,
+            "first": 4.69140625,
+            "last": 4.69140625
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        },
+        "DWM-shared-desktop": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 659.1613839285715,
+            "median": 659.1796875,
+            "p95": 659.2109375,
+            "min": 659.01953125,
+            "max": 659.2109375,
+            "first": 659.2109375,
+            "last": 659.2109375
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 16963.56640625,
+            "median": 16963.56640625,
+            "p95": 16963.56640625,
+            "min": 16963.56640625,
+            "max": 16963.56640625,
+            "first": 16963.56640625,
+            "last": 16963.56640625
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 10.80859375,
+            "median": 10.80859375,
+            "p95": 10.80859375,
+            "min": 10.80859375,
+            "max": 10.80859375,
+            "first": 10.80859375,
+            "last": 10.80859375
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x000163CA_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_10_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_11_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_12_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_1_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_2_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_3_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_4_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_5_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_6_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_7_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_8_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_9_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 1.2,
+              "median": 1,
+              "p95": 2,
+              "min": 1,
+              "max": 2,
+              "first": 1,
+              "last": 1
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 1,
+      "mode": "off",
+      "rounds": 35,
+      "seconds": 60.6520941,
+      "gpuTraceCaptured": false,
+      "groups": {
+        "Seelen-tree": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 6.3403569725419295,
+            "median": 6.487343223544551,
+            "p95": 7.787328782799438,
+            "min": 4.986073800755541,
+            "max": 7.856410991881885,
+            "first": 5.192283539858755,
+            "last": 5.031611424703955
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 2006.7301339285714,
+            "median": 2000.58984375,
+            "p95": 2070.9296875,
+            "min": 1987.625,
+            "max": 2072.734375,
+            "first": 2072.734375,
+            "last": 1991.69921875
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 122.51696428571428,
+            "median": 119.8359375,
+            "p95": 166.1328125,
+            "min": 119.828125,
+            "max": 166.1328125,
+            "first": 166.1328125,
+            "last": 119.8359375
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 4.81015625,
+            "median": 4.69140625,
+            "p95": 6.76953125,
+            "min": 4.69140625,
+            "max": 6.76953125,
+            "first": 6.76953125,
+            "last": 4.69140625
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        },
+        "DWM-shared-desktop": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 658.9870535714285,
+            "median": 658.98828125,
+            "p95": 658.98828125,
+            "min": 658.984375,
+            "max": 658.98828125,
+            "first": 658.98828125,
+            "last": 658.98828125
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 16963.5625,
+            "median": 16963.5625,
+            "p95": 16963.5625,
+            "min": 16963.5625,
+            "max": 16963.5625,
+            "first": 16963.5625,
+            "last": 16963.5625
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 10.68359375,
+            "median": 10.68359375,
+            "p95": 10.68359375,
+            "min": 10.68359375,
+            "max": 10.68359375,
+            "first": 10.68359375,
+            "last": 10.68359375
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x000163CA_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_10_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_11_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_12_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_1_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_2_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_3_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_4_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_5_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_6_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_7_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_8_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_9_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0.4857142857142857,
+              "median": 0,
+              "p95": 4,
+              "min": 0,
+              "max": 4,
+              "first": 1,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 2,
+      "mode": "off",
+      "rounds": 35,
+      "seconds": 60.3459165,
+      "gpuTraceCaptured": false,
+      "groups": {
+        "Seelen-tree": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 6.0612993301574045,
+            "median": 5.901872365810571,
+            "p95": 8.001776302890375,
+            "min": 4.663904345047827,
+            "max": 8.092208721282981,
+            "first": 5.084371277223351,
+            "last": 6.656621711265294
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 2020.389174107143,
+            "median": 2012.20703125,
+            "p95": 2043.96484375,
+            "min": 2002.0859375,
+            "max": 2045.1015625,
+            "first": 2040.859375,
+            "last": 2004.578125
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 120.10390625,
+            "median": 119.828125,
+            "p95": 120.14453125,
+            "min": 119.828125,
+            "max": 128.05078125,
+            "first": 119.84765625,
+            "last": 119.83203125
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 4.591852678571429,
+            "median": 4.56640625,
+            "p95": 4.69140625,
+            "min": 4.56640625,
+            "max": 5.08203125,
+            "first": 4.69140625,
+            "last": 4.56640625
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        },
+        "DWM-shared-desktop": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 658.9870535714285,
+            "median": 658.98828125,
+            "p95": 658.98828125,
+            "min": 658.98046875,
+            "max": 658.98828125,
+            "first": 658.98828125,
+            "last": 658.98828125
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 16963.5625,
+            "median": 16963.5625,
+            "p95": 16963.5625,
+            "min": 16963.5625,
+            "max": 16963.5625,
+            "first": 16963.5625,
+            "last": 16963.5625
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 10.68359375,
+            "median": 10.68359375,
+            "p95": 10.68359375,
+            "min": 10.68359375,
+            "max": 10.68359375,
+            "first": 10.68359375,
+            "last": 10.68359375
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x000163CA_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_10_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_11_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_12_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_1_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_2_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_3_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_4_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_5_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_6_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_7_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_8_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_9_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0.3142857142857143,
+              "median": 0,
+              "p95": 1,
+              "min": 0,
+              "max": 1,
+              "first": 1,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 2,
+      "mode": "on",
+      "rounds": 35,
+      "seconds": 60.6115922,
+      "gpuTraceCaptured": false,
+      "groups": {
+        "Seelen-tree": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 6.073004984769123,
+            "median": 5.826570852942463,
+            "p95": 7.937351003574666,
+            "min": 4.736825032748516,
+            "max": 7.965844137483654,
+            "first": 7.305074747284059,
+            "last": 5.792859368848277
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 2050.544419642857,
+            "median": 2037.421875,
+            "p95": 2084.515625,
+            "min": 2026.92578125,
+            "max": 2092.0234375,
+            "first": 2092.0234375,
+            "last": 2074.88671875
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 133.55636160714286,
+            "median": 119.6875,
+            "p95": 163.2109375,
+            "min": 119.6875,
+            "max": 168.92578125,
+            "first": 168.92578125,
+            "last": 163.2109375
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 5.09765625,
+            "median": 4.69140625,
+            "p95": 5.91796875,
+            "min": 4.69140625,
+            "max": 6.64453125,
+            "first": 6.64453125,
+            "last": 5.91796875
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        },
+        "DWM-shared-desktop": {
+          "cpuPercentNormalized": {
+            "n": 34,
+            "mean": 0,
+            "median": 0,
+            "p95": 0,
+            "min": 0,
+            "max": 0,
+            "first": 0,
+            "last": 0
+          },
+          "privateMiB": {
+            "n": 35,
+            "mean": 659.1484375,
+            "median": 659.15625,
+            "p95": 659.203125,
+            "min": 659.0078125,
+            "max": 659.203125,
+            "first": 659.203125,
+            "last": 659.1875
+          },
+          "attributedDedicatedMiB": {
+            "n": 35,
+            "mean": 16963.2875,
+            "median": 16963.5625,
+            "p95": 16963.5625,
+            "min": 16953.9375,
+            "max": 16963.5625,
+            "first": 16963.5625,
+            "last": 16963.5625
+          },
+          "attributedSharedMiB": {
+            "n": 35,
+            "mean": 10.710379464285714,
+            "median": 10.68359375,
+            "p95": 10.77734375,
+            "min": 10.68359375,
+            "max": 10.77734375,
+            "first": 10.68359375,
+            "last": 10.77734375
+          },
+          "gpuEngines": {
+            "luid_0x00000000_0x000163CA_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_10_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_11_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_12_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_1_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_2_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_3_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_4_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_5_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_6_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_7_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_8_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x000163CA_phys_0_eng_9_engtype_3D": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "n": 35,
+              "mean": 1.3142857142857143,
+              "median": 1,
+              "p95": 2,
+              "min": 1,
+              "max": 5,
+              "first": 1,
+              "last": 1
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_10_engtype_Graphics_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_11_engtype_Cuda": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_12_engtype_Compute_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_13_engtype_VR": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_14_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_15_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_16_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_17_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_18_engtype_Security_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_1_engtype_Compute_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_2_engtype_VideoDecode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_3_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_4_engtype_Copy": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_5_engtype_Security": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_6_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_7_engtype_VideoEncode": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_8_engtype_OFA_0": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            },
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_9_engtype_JPEG_Decode_1": {
+              "n": 35,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "min": 0,
+              "max": 0,
+              "first": 0,
+              "last": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "differences": [
+    {
+      "pair": 0,
+      "groups": {
+        "Seelen-tree": {
+          "cpuDeltaPercentagePoints": 0.13009517714673358,
+          "privateMiBDelta": 53.2578125,
+          "attributedDedicatedMiBDelta": 4.186049107142864,
+          "gpu": {}
+        },
+        "DWM-shared-desktop": {
+          "cpuDeltaPercentagePoints": 0,
+          "privateMiBDelta": 13.410044642857088,
+          "attributedDedicatedMiBDelta": 13.25770089285652,
+          "gpu": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "off": 0.34285714285714286,
+              "on": 1.2285714285714286,
+              "deltaPercentagePoints": 0.8857142857142858
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 1,
+      "groups": {
+        "Seelen-tree": {
+          "cpuDeltaPercentagePoints": -0.06795612826006181,
+          "privateMiBDelta": -12.456473214285552,
+          "attributedDedicatedMiBDelta": -2.4696428571428584,
+          "gpu": {}
+        },
+        "DWM-shared-desktop": {
+          "cpuDeltaPercentagePoints": 0,
+          "privateMiBDelta": 0.1743303571429351,
+          "attributedDedicatedMiBDelta": 0.00390625,
+          "gpu": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "off": 0.4857142857142857,
+              "on": 1.2,
+              "deltaPercentagePoints": 0.7142857142857142
+            }
+          }
+        }
+      }
+    },
+    {
+      "pair": 2,
+      "groups": {
+        "Seelen-tree": {
+          "cpuDeltaPercentagePoints": 0.011705654611718685,
+          "privateMiBDelta": 30.15524553571413,
+          "attributedDedicatedMiBDelta": 13.452455357142867,
+          "gpu": {}
+        },
+        "DWM-shared-desktop": {
+          "cpuDeltaPercentagePoints": 0,
+          "privateMiBDelta": 0.16138392857146755,
+          "attributedDedicatedMiBDelta": -0.2750000000014552,
+          "gpu": {
+            "luid_0x00000000_0x1014FC7A_phys_0_eng_0_engtype_3D": {
+              "off": 0.3142857142857143,
+              "on": 1.3142857142857143,
+              "deltaPercentagePoints": 1
+            }
+          }
+        }
+      }
+    }
+  ]
+}

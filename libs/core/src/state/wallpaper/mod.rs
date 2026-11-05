@@ -40,6 +40,9 @@ pub struct Wallpaper {
 pub enum WallpaperKind {
     #[serde(alias = "image")]
     Image,
+    /// Follows the current static wallpaper selected by Windows.
+    #[serde(alias = "native")]
+    Native,
     #[serde(alias = "video")]
     Video,
     #[serde(alias = "layered")]

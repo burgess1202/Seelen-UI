@@ -1,6 +1,5 @@
 use std::sync::LazyLock;
 
-use owo_colors::OwoColorize;
 use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
 
 use crate::{error::Result, windows_api::WindowsApi};
@@ -88,41 +87,6 @@ impl SluServiceLogger {
         let dispatch = fern::Dispatch::new()
             .level(log::LevelFilter::Trace)
             .chain(file_dispatch);
-
-        #[cfg(debug_assertions)]
-        let dispatch = dispatch.chain(
-            fern::Dispatch::new()
-                .format(|out, message, record| {
-                    out.finish(format_args!(
-                        "[{}][{}] {}",
-                        match record.level() {
-                            log::Level::Error => "ERROR".to_string(),
-                            log::Level::Warn => "WARN~".to_string(),
-                            log::Level::Info => "INFO~".to_string(),
-                            log::Level::Debug => "DEBUG".to_string(),
-                            log::Level::Trace => "TRACE".to_string(),
-                        },
-                        if record.level() == log::Level::Error {
-                            record
-                                .file()
-                                .map(|f| {
-                                    format!(
-                                        "{}:{}",
-                                        f.replace("\\", "/"),
-                                        record.line().unwrap_or_default()
-                                    )
-                                })
-                                .unwrap_or_else(|| record.target().to_owned())
-                                .bright_red()
-                                .to_string()
-                        } else {
-                            record.target().bright_black().to_string()
-                        },
-                        message
-                    ))
-                })
-                .chain(std::io::stdout()),
-        );
 
         dispatch.apply()?;
         Self::register_panic_hook();

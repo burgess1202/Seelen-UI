@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-10-23T03:50:21.020Z",
+  "note": "Actual frontend code; mocked native/window IPC, not GPU pixels or a JS-stall GPU test.",
+  "results": [
+    {
+      "name": "blocked-ipc",
+      "elapsedMs": 62.19999998807907,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 897,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "late-close-after-reopen",
+      "elapsedMs": 258.40000000596046,
+      "hideCalls": 1,
+      "controlMessages": 3,
+      "hideObservation": {
+        "time": 656,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "deadline-no-finish",
+      "elapsedMs": 94.5,
+      "hideCalls": 0,
+      "controlMessages": 1,
+      "passed": true
+    },
+    {
+      "name": "content-animation",
+      "elapsedMs": 111.7999999821186,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 241.09999999403954,
+        "opacity": "0",
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 109.51299999337644,
+            "endTime": 1500
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "repeated-hide-reopen",
+      "elapsedMs": 187.2000000178814,
+      "hideCalls": 0,
+      "controlMessages": 2,
+      "passed": true
+    },
+    {
+      "name": "no-native-theme",
+      "elapsedMs": 1,
+      "hideCalls": 1,
+      "controlMessages": 0,
+      "hideObservation": {
+        "time": 716.7000000178814,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "long-close-watchdog",
+      "elapsedMs": 202.90000000596046,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 332.7999999821186,
+        "opacity": "0.80953",
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 190.4700000151992,
+            "endTime": 1000
+          }
+        ]
+      },
+      "passed": true
+    }
+  ]
+}

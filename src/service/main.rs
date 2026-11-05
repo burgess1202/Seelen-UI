@@ -1,5 +1,5 @@
-// Prevents additional console window on Windows in release
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+// The native helper runs in the background in both debug and release builds.
+#![cfg_attr(target_os = "windows", windows_subsystem = "windows")]
 
 mod app_management;
 mod cli;

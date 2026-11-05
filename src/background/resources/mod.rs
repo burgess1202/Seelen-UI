@@ -5,6 +5,7 @@ mod system_icon_pack;
 pub mod user_icon_pack;
 
 use std::{
+    collections::BTreeMap,
     path::{Path, PathBuf},
     sync::{Arc, LazyLock},
 };
@@ -12,9 +13,10 @@ use std::{
 use seelen_core::{
     handlers::SeelenEvent,
     resource::{
-        IconPackId, PluginId, ResourceId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId,
+        IconPackId, InternalResourceMetadata, PluginId, ResourceId, ResourceKind, ResourceMetadata,
+        ResourceText, SluResource, ThemeId, WallpaperId, WidgetId,
     },
-    state::{IconPack, Plugin, Theme, Wallpaper, WallpaperCollection, Widget},
+    state::{IconPack, Plugin, Theme, Wallpaper, WallpaperCollection, WallpaperKind, Widget},
 };
 use uuid::Uuid;
 
@@ -27,6 +29,8 @@ use crate::{
 
 pub static RESOURCES: LazyLock<Arc<ResourceManager>> =
     LazyLock::new(|| Arc::new(ResourceManager::default()));
+
+const NATIVE_WALLPAPER_ID: &str = "@seelen/current-windows-wallpaper";
 
 #[derive(Default)]
 pub struct ResourceManager {
@@ -301,6 +305,10 @@ impl ResourceManager {
         });
         futures::future::join_all(handles).await;
 
+        if kind == ResourceKind::Wallpaper {
+            self.ensure_native_wallpaper();
+        }
+
         if kind == ResourceKind::IconPack {
             // try load system icon pack
             let _ = self
@@ -310,6 +318,34 @@ impl ResourceManager {
             std::thread::spawn(move || RESOURCES.ensure_system_icon_pack(on_mount).log_error());
         }
         Ok(())
+    }
+
+    fn ensure_native_wallpaper(&self) {
+        let id = WallpaperId::from(NATIVE_WALLPAPER_ID.to_owned());
+        let localized = |en: &str, zh_tw: &str| {
+            ResourceText::Localized(BTreeMap::from([
+                ("en".to_owned(), en.to_owned()),
+                ("zh-TW".to_owned(), zh_tw.to_owned()),
+            ]))
+        };
+        let wallpaper = Wallpaper {
+            id: id.clone(),
+            r#type: WallpaperKind::Native,
+            metadata: ResourceMetadata {
+                display_name: localized("Current Windows wallpaper", "目前的 Windows 桌布"),
+                description: localized(
+                    "Follows the static wallpaper currently selected by Windows, including snapshots set by Wallpaper Engine.",
+                    "跟隨 Windows 目前選用的靜態桌布，包含 Wallpaper Engine 設定的桌布快照。",
+                ),
+                internal: InternalResourceMetadata {
+                    bundled: true,
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let _ = self.wallpapers.insert_sync(id, Arc::new(wallpaper));
     }
 
     /// Activates a loaded resource the same way the "Enable" button does after installing

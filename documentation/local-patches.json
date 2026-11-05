@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "patches": [
+    {
+      "id": "native-blur",
+      "name": "原生模糊與可見性同步",
+      "pr": 1940,
+      "files": [
+        "libs/core/src/state/theme/nativeBlur.ts",
+        "libs/core/src/state/theme/nativeBlurAnimation.ts",
+        "libs/core/src/state/theme/nativeBlurGeometry.ts",
+        "libs/core/src/state/theme/native_blur.rs",
+        "libs/core/src/state/theme/theming.ts",
+        "libs/core/src/state/widget/abstractions/4_visibility.ts",
+        "libs/core/src/state/widget/abstractions/hideAnimations.ts",
+        "src/background/widgets/native_blur.rs",
+        "src/background/widgets/native_blur_effect.rs",
+        "src/background/widgets/native_blur_performance.rs",
+        "src/background/widgets/native_blur_visibility.rs",
+        "src/background/widgets/webview.rs",
+        "src/ui/vanilla/entry-point/MainSetup.ts"
+      ],
+      "validation": {
+        "sourceHash": "7a84b69a31557127e0a6030930cd030d09d9a589609b730f0e55fe38a1c42854",
+        "summary": "2026-11-05 前端／Debug 建置通過",
+        "visual": "pending"
+      }
+    },
+    {
+      "id": "toolbar-toggle",
+      "name": "工具列再次點擊關閉",
+      "pr": 1916,
+      "files": [
+        "libs/core/src/state/widget/mod.ts",
+        "src/ui/svelte/fancy-toolbar/components/Evaluated/actionEvaluator.ts"
+      ],
+      "validation": {
+        "sourceHash": "f4b490d27572617fea0d481ac51726fecfb3c5236e39116f189a80ca2019f5e8",
+        "summary": "2026-11-05 前端／Debug 建置通過",
+        "visual": "pending"
+      }
+    },
+    {
+      "id": "native-wallpaper",
+      "name": "跟隨 Windows 靜態桌布",
+      "pr": null,
+      "files": [
+        "libs/core/src/state/wallpaper/mod.rs",
+        "src/background/resources/mod.rs",
+        "src/background/state/infrastructure.rs",
+        "libs/ui/react/components/Wallpaper/index.tsx",
+        "libs/ui/react/components/Wallpaper/components/NativeWallpaper.tsx",
+        "libs/ui/svelte/components/Wallpaper/Wallpaper.svelte",
+        "libs/ui/svelte/components/Wallpaper/components/NativeWallpaper.svelte",
+        "libs/ui/svelte/components/Wallpaper/nativeWallpaperSource.svelte.ts"
+      ],
+      "validation": {
+        "sourceHash": "67a78161885b879f29ac5a8ad2e87621d195a85180a52cebcf3296d38a7ca426",
+        "summary": "2026-11-05 前端／Debug 建置通過",
+        "visual": "pending"
+      }
+    },
+    {
+      "id": "service-no-console",
+      "name": "原生服務隱藏主控台",
+      "pr": null,
+      "files": [
+        "src/service/main.rs",
+        "src/service/logger.rs"
+      ],
+      "validation": {
+        "sourceHash": "8e5453df678937fe8b0e6d83b0d7e536ab6bbf0d5b1f39b0178b4a9c728730bd",
+        "summary": "2026-11-05 服務 check／Debug 建置、PE GUI 核對通過",
+        "visual": "pending"
+      }
+    }
+  ]
+}

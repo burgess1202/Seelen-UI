@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-10-23T03:48:51.607Z",
+  "note": "Actual frontend code; mocked native/window IPC, not GPU pixels or a JS-stall GPU test.",
+  "results": [
+    {
+      "name": "blocked-ipc",
+      "elapsedMs": 60.5,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 548.9000000059605,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "late-close-after-reopen",
+      "elapsedMs": 270.40000000596046,
+      "hideCalls": 1,
+      "controlMessages": 3,
+      "hideObservation": {
+        "time": 397.40000000596046,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "deadline-no-finish",
+      "elapsedMs": 102.40000000596046,
+      "hideCalls": 0,
+      "controlMessages": 1,
+      "passed": true
+    },
+    {
+      "name": "content-animation",
+      "elapsedMs": 108.5,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 421.09999999403954,
+        "opacity": "0",
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 109.56300001284109,
+            "endTime": 1500
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "repeated-hide-reopen",
+      "elapsedMs": 185,
+      "hideCalls": 0,
+      "controlMessages": 2,
+      "passed": true
+    },
+    {
+      "name": "no-native-theme",
+      "elapsedMs": 0.7000000178813934,
+      "hideCalls": 1,
+      "controlMessages": 0,
+      "hideObservation": {
+        "time": 361.10000002384186,
+        "opacity": "0",
+        "animations": []
+      },
+      "passed": true
+    },
+    {
+      "name": "long-close-watchdog",
+      "elapsedMs": 214.69999998807907,
+      "hideCalls": 1,
+      "controlMessages": 2,
+      "hideObservation": {
+        "time": 522.5,
+        "opacity": "0.797692",
+        "animations": [
+          {
+            "playState": "running",
+            "currentTime": 202.30799999663984,
+            "endTime": 1000
+          }
+        ]
+      },
+      "passed": true
+    }
+  ]
+}

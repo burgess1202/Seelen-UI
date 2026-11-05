@@ -1,5 +1,16 @@
 # AGENTS.md
 
+## Local workspace entry (2026-11-05)
+
+- This is the only active core development checkout, based on official v2.8.9 with preserved local changes. Branch: `dev/aurora`.
+- Read `documentation/LOCAL_PATCHES.md` and `../docs/DEVELOPMENT_WORKFLOW.md` for local capabilities and operations.
+- The root `../seelen-dev.cmd` and `../tools/seelen-dev.ps1` provide the local workflow. Generated binaries use the `target-dir` in `.cargo/config.toml`.
+- `../seelen-reference/` is clean official v2.8.10 reference; it is not this host's exact source. Legacy projects in `../archives/` are not active dependencies.
+- Preserve pre-existing staged, unstaged and untracked changes. Do not merge old experimental patches or update the official base as part of an unrelated task.
+- Use root `npm run build:lib` for SDK rebuilds and `npm run sdk:check` for freshness. The wrapper stages Rust bindings and npm output, validates them, then publishes; do not run destructive SDK subtasks directly in the active checkout. See `../docs/SDK_WORKFLOW.md`.
+- Upstream checks use `../tools/upstream.mjs` and the patch manifest in `documentation/local-patches.json`; results are evidence, not authorization to merge or remove local patches. Community reference tools have been deleted by user request.
+- The frontend is owned by the independent Node agent in `../tools/frontend-agent.mjs`, registered for user-login startup. See `../docs/FRONTEND_SERVICE.md`. SDK rebuild coordinates pause/resume through its authenticated local API; do not stop node.exe by name or couple this agent to UI restarts.
+
 Guidance for AI agents working in this repository.
 
 Seelen UI is a customizable Windows desktop environment built with:
@@ -86,9 +97,9 @@ Quality (Deno-based):
 
 Core library (`libs/core`):
 
-- `deno task build`
-- `deno task build:rs` - Regenerate Rust -> TypeScript bindings
-- `deno task build:npm`
+- `npm run build:lib` from this repository root - Verified isolated bindings + npm SDK rebuild
+- `npm run sdk:check` from this repository root - Content/API/output freshness check
+- `deno task build:rs` / `deno task build:npm` are internal subtasks used in the staging workspace, not the daily active-checkout entry.
 
 ## Repo Map (Where Things Live)
 

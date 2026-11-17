@@ -364,12 +364,12 @@ slu_commands_declaration! {
         @webview()
         @async()
         @fallible()
-        sync_native_blur_regions(session: u32, sequence: u32, scale: f32, regions: Vec<NativeBlurRegion>, visibility_epoch: Option<u32>),
+        sync_native_blur_regions(session: u32, sequence: u32, scale: f32, regions: Vec<NativeBlurRegion>, visibility_epoch: Option<u32>, animate_close: Option<bool>, motion: Option<NativeBlurCloseAnimation>) -> bool,
     SetNativeBlurVisibility =
         @webview()
         @async()
         @fallible()
-        set_native_blur_visibility(session: u32, epoch: u32, visible: bool, deadline_ms: f64),
+        set_native_blur_visibility(session: u32, epoch: u32, visible: bool, deadline_ms: f64, close_animation: Option<NativeBlurCloseAnimation>) -> bool,
     NormalizeSelfDevicePixelRatio =
         @webview()
         @fallible()
@@ -403,7 +403,6 @@ slu_commands_declaration! {
         @fallible()
         get_native_shell_wallpaper() -> std::path::PathBuf,
     GetNativeShellWallpaperSnapshot =
-        @fallible()
         get_native_shell_wallpaper_snapshot() -> (std::path::PathBuf, u64),
     SetNativeShellWallpaper =
         @webview()

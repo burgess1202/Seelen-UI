@@ -45,8 +45,7 @@ impl crate::tauri_handlers::Handlers {
         if was_focused {
             window.show_window_async(SW_MINIMIZE)?;
         } else {
-            window.unminimize()?;
-            window.focus()?;
+            window.activate()?;
         }
         Ok(())
     }

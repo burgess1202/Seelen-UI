@@ -143,7 +143,11 @@ pub fn set_foreground(hwnd: isize) -> Result<(), String> {
         return Ok(());
     }
 
-    if unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
+    // Even this first step is verified against the real foreground window: a `TRUE` return
+    // alone can be a false success (see `wait_until_foreground`'s docs).
+    if unsafe { SetForegroundWindow(target_hwnd).as_bool() }
+        && wait_until_foreground(target_hwnd, 10)
+    {
         return Ok(());
     }
 

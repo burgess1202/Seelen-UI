@@ -34,14 +34,17 @@ export function hideAnimationBudget(animations: Animation[], maximum: number): n
   return animations.length ? maximum : 0;
 }
 
-export async function waitHideAnimations(animations: Animation[], budget: number): Promise<void> {
-  if (!animations.length || budget <= 0) return;
+export async function waitHideAnimations(
+  animations: Animation[],
+  budget: number,
+): Promise<"none" | "finished" | "watchdog"> {
+  if (!animations.length || budget <= 0) return "none";
   let timeout: ReturnType<typeof setTimeout> | undefined;
   try {
-    await Promise.race([
-      Promise.allSettled(animations.map((animation) => animation.finished)),
-      new Promise<void>((resolve) => {
-        timeout = setTimeout(resolve, budget);
+    return await Promise.race([
+      Promise.allSettled(animations.map((animation) => animation.finished)).then(() => "finished" as const),
+      new Promise<"watchdog">((resolve) => {
+        timeout = setTimeout(() => resolve("watchdog"), budget);
       }),
     ]);
   } finally {

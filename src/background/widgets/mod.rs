@@ -14,7 +14,10 @@ pub mod window_manager;
 
 use std::{
     path::{Path, PathBuf},
-    sync::LazyLock,
+    sync::{
+        LazyLock,
+        atomic::{AtomicU64, Ordering},
+    },
 };
 
 use seelen_core::{
@@ -22,8 +25,8 @@ use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceId,
     state::{
-        Alignment, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus, WidgetTriggerPayload,
-        context_menu::ContextMenu, dialog::Dialog,
+        Alignment, WidgetDebugInfo, WidgetInstanceMode, WidgetPreset, WidgetStatus,
+        WidgetTriggerPayload, context_menu::ContextMenu, dialog::Dialog,
     },
     system_state::{AppBarEdge, ZOrder},
 };
@@ -32,7 +35,7 @@ use windows::Win32::Foundation::{HWND, RECT};
 
 use crate::{
     app::{emit_to_webviews, get_app_handle},
-    error::Result,
+    error::{Result, ResultLogExt},
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::SyncHashMap},
@@ -43,13 +46,44 @@ use crate::{
     },
 };
 
-static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
-    LazyLock::new(SyncHashMap::new);
+static PENDING_TRIGGERS: LazyLock<
+    SyncHashMap<WidgetWebviewLabel, Option<(WidgetTriggerPayload, Option<u64>)>>,
+> = LazyLock::new(SyncHashMap::new);
+static POPUP_SWITCH_GENERATION: AtomicU64 = AtomicU64::new(0);
 
-fn trigger_widget_inner(
+pub fn native_blur_focus_changed(hwnd: isize, owner: isize) {
+    native_blur::on_focus_changed(hwnd, owner);
+}
+
+fn popup_request_is_current(generation: Option<u64>) -> bool {
+    generation.is_none_or(|value| value == POPUP_SWITCH_GENERATION.load(Ordering::Acquire))
+}
+
+#[cfg(test)]
+mod popup_switch_tests {
+    use super::*;
+
+    #[test]
+    fn popup_switch_keeps_only_latest_toolbar_trigger_and_preserves_other_triggers() {
+        let latest = POPUP_SWITCH_GENERATION.load(Ordering::Acquire);
+        assert!(popup_request_is_current(Some(latest)));
+        assert!(!popup_request_is_current(Some(latest.wrapping_add(1))));
+        assert!(popup_request_is_current(None));
+    }
+}
+
+fn trigger_widget_inner(payload: WidgetTriggerPayload, owner_hwnd: Option<isize>) -> Result<()> {
+    trigger_widget_ordered(payload, owner_hwnd, None)
+}
+
+fn trigger_widget_ordered(
     mut payload: WidgetTriggerPayload,
     owner_hwnd: Option<isize>,
+    generation: Option<u64>,
 ) -> Result<()> {
+    if !popup_request_is_current(generation) {
+        return Ok(());
+    }
     let state = FULL_STATE.load();
     if !state.is_widget_enabled(&payload.id) {
         return Err("Can't trigger a disabled widget".into());
@@ -66,6 +100,9 @@ fn trigger_widget_inner(
         monitor_id.as_deref(),
         payload.instance_id.as_ref(),
     );
+    if widget.preset == WidgetPreset::Popup {
+        native_blur::allow_popup_trigger(label.raw.clone(), generation);
+    }
 
     match widget.instances {
         WidgetInstanceMode::Single => {}
@@ -104,8 +141,22 @@ fn trigger_widget_inner(
     }
 
     if !WIDGET_MANAGER.is_ready(&label) {
+        if !popup_request_is_current(generation) {
+            return Ok(());
+        }
         log::trace!("Trigger postponed, because widget instance is not ready: {label}");
-        PENDING_TRIGGERS.upsert(label.clone(), payload);
+        // Check and replace under the same short pending-map lock: an older worker
+        // cannot overwrite a newer request for the same still-mounting popup.
+        let queued = PENDING_TRIGGERS.get_or_default(label.clone(), |pending| {
+            if !popup_request_is_current(generation) {
+                return false;
+            }
+            *pending = Some((payload, generation));
+            true
+        });
+        if !queued {
+            return Ok(());
+        }
 
         WIDGET_MANAGER.deployments.get(&label.widget_id, |c| {
             c.start_webview(&label);
@@ -113,7 +164,9 @@ fn trigger_widget_inner(
         return Ok(());
     }
 
-    get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &payload)?;
+    if popup_request_is_current(generation) {
+        get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &payload)?;
+    }
     Ok(())
 }
 
@@ -206,14 +259,61 @@ impl crate::tauri_handlers::Handlers {
         let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
         WIDGET_MANAGER.set_status(&label, status);
 
-        if let Some(pending) = PENDING_TRIGGERS.remove(&label) {
-            log::info!("Emitting pending trigger for {label}");
-            get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &pending)?;
+        if let Some(Some((pending, generation))) = PENDING_TRIGGERS.remove(&label) {
+            if popup_request_is_current(generation) {
+                log::info!("Emitting pending trigger for {label}");
+                get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &pending)?;
+            }
         }
         Ok(())
     }
 
     pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
+        let toolbar = payload
+            .custom_args
+            .as_ref()
+            .and_then(|args| args.get("__seelenToolbarToggle"))
+            .is_some_and(|value| value.0.as_bool() == Some(true));
+        let coordinates_switch = RESOURCES
+            .widgets
+            .read_sync(&payload.id, |_, widget| {
+                widget.preset == WidgetPreset::Popup || widget.native_blur_switch == Some(true)
+            })
+            .unwrap_or(false);
+        if toolbar && coordinates_switch {
+            if !FULL_STATE.load().is_widget_enabled(&payload.id) {
+                return Err("Can't trigger a disabled widget".into());
+            }
+            let generation = POPUP_SWITCH_GENERATION.fetch_add(1, Ordering::AcqRel) + 1;
+            crate::get_tokio_handle().spawn_blocking(move || {
+                if !popup_request_is_current(Some(generation)) { return; }
+                let monitor = payload.monitor_id.as_ref().map(ToString::to_string);
+                let label = WidgetWebviewLabel::new(&payload.id, monitor.as_deref(), payload.instance_id.as_ref());
+                let cold = !WIDGET_MANAGER.is_ready(&label);
+                get_app_handle().run_on_main_thread(move || {
+                    if !popup_request_is_current(Some(generation)) { return; }
+                    native_blur::prepare_popup_switch(&payload.id, generation);
+                    let close = if cold { native_blur::request_switch_close(&payload.id) } else { None };
+                    crate::get_tokio_handle().spawn(async move {
+                        if let Some(close) = close {
+                            // Release on native animation submission, or fall back if the outgoing
+                            // popup cannot produce a path. No UI/deployment lock is held here.
+                            let started = std::time::Instant::now();
+                            let outcome = tokio::time::timeout(std::time::Duration::from_millis(120), close).await;
+                            if native_blur::diagnostics_enabled() {
+                                log::info!(target: "native_blur_timeline",
+                                    "stage=popup.switch.close_gate.end generation={generation} target={} acknowledged={} wait_ms={:.1}",
+                                    payload.id, matches!(outcome, Ok(Ok(()))), started.elapsed().as_secs_f64() * 1000.0);
+                            }
+                        }
+                        crate::get_tokio_handle().spawn_blocking(move || {
+                            trigger_widget_ordered(payload, None, Some(generation)).log_error();
+                        });
+                    });
+                }).log_error();
+            });
+            return Ok(());
+        }
         trigger_widget_inner(payload, None)
     }
 

@@ -2,12 +2,11 @@
 
 use std::cell::RefCell;
 
+use crate::error::Result;
 use windows::{
     Foundation::{IPropertyValue, PropertyValue},
     Graphics::Effects::{IGraphicsEffect, IGraphicsEffectSource},
-    UI::Composition::{
-        CompositionEffectBrush, CompositionEffectSourceParameter, Compositor,
-    },
+    UI::Composition::{CompositionEffectBrush, CompositionEffectSourceParameter, Compositor},
     Win32::{
         Graphics::Direct2D::CLSID_D2D1GaussianBlur,
         System::WinRT::{
@@ -21,7 +20,6 @@ use windows::{
     },
     core::{HSTRING, Interface, PCWSTR, implement},
 };
-use crate::error::Result;
 
 const SOURCE_NAME: &str = "backdrop";
 
@@ -38,11 +36,21 @@ pub(super) fn create_blur_brush(
 ) -> Result<CompositionEffectBrush> {
     let source: IGraphicsEffectSource =
         CompositionEffectSourceParameter::Create(&HSTRING::from(SOURCE_NAME))?.cast()?;
-    let effect: IGraphicsEffect = GaussianBlurEffect { source, blur_amount }.into();
-    let factory = probe("CreateEffectFactory", compositor.CreateEffectFactory(&effect))?;
+    let effect: IGraphicsEffect = GaussianBlurEffect {
+        source,
+        blur_amount,
+    }
+    .into();
+    let factory = probe(
+        "CreateEffectFactory",
+        compositor.CreateEffectFactory(&effect),
+    )?;
     let brush = probe("CreateBrush", factory.CreateBrush())?;
     let backdrop = compositor.CreateBackdropBrush()?;
-    probe("SetSourceParameter", brush.SetSourceParameter(&HSTRING::from(SOURCE_NAME), &backdrop))?;
+    probe(
+        "SetSourceParameter",
+        brush.SetSourceParameter(&HSTRING::from(SOURCE_NAME), &backdrop),
+    )?;
     #[cfg(test)]
     TEST_BRUSH_CREATIONS.with(|count| count.set(count.get() + 1));
     Ok(brush)
@@ -50,7 +58,8 @@ pub(super) fn create_blur_brush(
 
 pub(super) fn ensure_dispatcher() -> Result<()> {
     DISPATCHER.with_borrow_mut(|dispatcher| -> Result<()> {
-        if dispatcher.is_none() && windows::System::DispatcherQueue::GetForCurrentThread().is_err() {
+        if dispatcher.is_none() && windows::System::DispatcherQueue::GetForCurrentThread().is_err()
+        {
             let options = DispatcherQueueOptions {
                 dwSize: std::mem::size_of::<DispatcherQueueOptions>() as u32,
                 threadType: DQTYPE_THREAD_CURRENT,

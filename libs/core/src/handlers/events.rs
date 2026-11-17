@@ -110,6 +110,7 @@ slu_events_declaration! {
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
     WidgetPermissionsChanged(HashMap<WidgetId, HashMap<WidgetPerm, WidgetPermState>>) as "widget::permissions-changed",
     StateWallpapersChanged(Vec<Wallpaper>) as "UserResources::wallpapers-changed",
+    NativeShellWallpaperChanged((std::path::PathBuf, u64)) as "shell::native-wallpaper-changed",
 
     // system tray
     SystemTrayChanged(Vec<SysTrayIcon>) as "system-tray::changed",
@@ -118,6 +119,7 @@ slu_events_declaration! {
 
     @queued()
     WidgetTriggered(WidgetTriggerPayload) as "widget::triggered",
+    WidgetNativeBlurClose(()) as "widget::native-blur-close",
 
     // Radios
     RadiosChanged(Vec<RadioDevice>) as "radio::changed",

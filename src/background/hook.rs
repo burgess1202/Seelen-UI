@@ -143,10 +143,11 @@ impl HookManager {
             );
 
             if shoup_update_focused && origin.is_focused() {
-                emit_to_webviews(
-                    SeelenEvent::GlobalFocusChanged,
-                    origin.as_focused_app_information(),
-                );
+                let focused = origin.as_focused_app_information();
+                if event == WinEvent::SystemForeground {
+                    crate::widgets::native_blur_focus_changed(focused.hwnd, focused.owner_hwnd);
+                }
+                emit_to_webviews(SeelenEvent::GlobalFocusChanged, focused);
             }
         }
     }

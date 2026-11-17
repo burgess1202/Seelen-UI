@@ -45,6 +45,7 @@ export function readOpacityPlan(
   element: HTMLElement,
   previous?: OpacityPlan,
   readStyle: (element: Element) => CSSStyleDeclaration = getComputedStyle,
+  useDocumentClock = false,
 ): OpacityPlan | undefined {
   const tracks: Track[] = [];
   let base = 1;
@@ -102,7 +103,12 @@ export function readOpacityPlan(
   const count = Math.min(128, Math.max(2, Math.ceil(durationMs / 8) + 1));
   return {
     key,
-    startedAtMs: performance.timeOrigin + performance.now(),
+    // Animation.currentTime is sampled on the document timeline. Its frame time
+    // may precede the JS callback's clock, especially under load.
+    startedAtMs: performance.timeOrigin +
+      (useDocumentClock && typeof document.timeline.currentTime === "number"
+        ? document.timeline.currentTime
+        : performance.now()),
     durationMs,
     values: Array.from(
       { length: count },

@@ -80,18 +80,6 @@ impl crate::tauri_handlers::Handlers {
         WindowsApi::get_wallpaper()
     }
 
-    /// The timestamp changes when an application overwrites the same wallpaper file.
-    pub fn get_native_shell_wallpaper_snapshot() -> Result<(PathBuf, u64)> {
-        let path = WindowsApi::get_wallpaper()?;
-        let revision = std::fs::metadata(&path)
-            .and_then(|metadata| metadata.modified())
-            .ok()
-            .and_then(|modified| modified.duration_since(std::time::UNIX_EPOCH).ok())
-            .map(|duration| duration.as_millis() as u64)
-            .unwrap_or_default();
-        Ok((path, revision))
-    }
-
     pub fn set_native_shell_wallpaper(webview: WebviewWindow, path: PathBuf) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
         WindowsApi::set_wallpaper(path)

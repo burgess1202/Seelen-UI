@@ -18,11 +18,24 @@
         "src/background/widgets/native_blur_performance.rs",
         "src/background/widgets/native_blur_visibility.rs",
         "src/background/widgets/webview.rs",
-        "src/ui/vanilla/entry-point/MainSetup.ts"
+        "src/ui/vanilla/entry-point/MainSetup.ts",
+        "libs/core/src/state/theme/nativeBlurLane.ts",
+        "libs/core/src/state/theme/nativeBlurDiagnostics.ts",
+        "libs/core/src/state/theme/nativeBlurLane.test.ts",
+        "libs/core/src/state/theme/nativeBlurDiagnostics.test.ts",
+        "src/background/widgets/native_blur_diagnostics.rs",
+        "scripts/native-blur-stability-tests.mjs",
+        "src/background/widgets/mod.rs",
+        "src/background/widgets/loader.rs",
+        "src/background/hook.rs",
+        "src/background/widgets/native_blur_focus.rs",
+        "libs/core/src/state/theme/nativeBlurProjection.ts",
+        "libs/core/src/state/theme/nativeBlurProjection.test.ts",
+        "scripts/native-blur-flip-tests.mjs"
       ],
       "validation": {
-        "sourceHash": "7a84b69a31557127e0a6030930cd030d09d9a589609b730f0e55fe38a1c42854",
-        "summary": "2026-11-05 前端／Debug 建置通過",
+        "sourceHash": "4d6f3e6000227d3f7ac36d953cd8a3155e3fedb1399fc0883b336161b0095511",
+        "summary": "2026-11-07 flip：TS 18、native Rust 19（2 ignored）、browser 新增 8／既有 7+14、SDK bindings 83 及 SDK/Debug 建置通過；實機待解鎖驗收",
         "visual": "pending"
       }
     },
@@ -52,11 +65,15 @@
         "libs/ui/react/components/Wallpaper/components/NativeWallpaper.tsx",
         "libs/ui/svelte/components/Wallpaper/Wallpaper.svelte",
         "libs/ui/svelte/components/Wallpaper/components/NativeWallpaper.svelte",
-        "libs/ui/svelte/components/Wallpaper/nativeWallpaperSource.svelte.ts"
+        "libs/ui/svelte/components/Wallpaper/nativeWallpaperSource.svelte.ts",
+        "src/background/state/application/settings.rs",
+        "src/background/modules/shell_wallpaper/mod.rs",
+        "src/background/modules/shell_wallpaper/application.rs",
+        "src/background/modules/shell_wallpaper/infrastructure.rs"
       ],
       "validation": {
-        "sourceHash": "67a78161885b879f29ac5a8ad2e87621d195a85180a52cebcf3296d38a7ca426",
-        "summary": "2026-11-05 前端／Debug 建置通過",
+        "sourceHash": "d61fb5cf28770a7fe1498a41653f1cff8fd58e9cd0d9227b05302e9201620b43",
+        "summary": "2026-11-06 原生桌布持久化 3 項回歸與 Debug 建置通過；已重新啟動開發版",
         "visual": "pending"
       }
     },

@@ -1,4 +1,5 @@
 import type { NativeBlurShape } from "../../../gen/types/NativeBlurShape.ts";
+import { projectFlipOutline } from "./nativeBlurProjection.ts";
 
 type Radii = NativeBlurShape["radii"];
 
@@ -24,7 +25,7 @@ export function resolveRadius(value: string, width: number, height: number): [nu
   return [resolve(parts[0] ?? "0", width), resolve(parts[1] ?? parts[0] ?? "0", height)];
 }
 
-/** Read only axis-aligned geometry. Unsupported shapes are omitted, never overdrawn. */
+/** Axis-aligned by default; a theme may opt into a limited single-plane hinge. */
 export function readNativeBlurGeometry(
   element: HTMLElement,
   readStyle: (element: Element) => CSSStyleDeclaration = getComputedStyle,
@@ -35,6 +36,7 @@ export function readNativeBlurGeometry(
   let opacity = 1;
   for (let node: HTMLElement | null = element; node; node = node.parentElement) {
     const style = readStyle(node);
+    let projected: DOMMatrixReadOnly | undefined;
     if (style.display === "none" || style.visibility !== "visible" || style.contentVisibility === "hidden") return null;
     if (
       style.clipPath !== "none" || style.maskImage !== "none" || style.filter !== "none" ||
@@ -44,6 +46,10 @@ export function readNativeBlurGeometry(
     if (style.transform !== "none") {
       const matrix = new DOMMatrixReadOnly(style.transform);
       if (
+        !matrix.is2D && node === element && style.getPropertyValue("--slu-native-blur-projection").trim() === "flip"
+      ) {
+        projected = matrix;
+      } else if (
         !matrix.is2D || Math.abs(matrix.b) > 0.00001 || Math.abs(matrix.c) > 0.00001 ||
         matrix.a <= 0 || matrix.d <= 0
       ) return null;
@@ -73,7 +79,7 @@ export function readNativeBlurGeometry(
     if (width <= 0 || height <= 0 || node.getClientRects().length !== 1) return null;
     const scaleX = rect.width / width;
     const scaleY = rect.height / height;
-    const radii = normalizeRadii(
+    const localRadii = normalizeRadii(
       [
         resolveRadius(style.borderTopLeftRadius, width, height),
         resolveRadius(style.borderTopRightRadius, width, height),
@@ -82,9 +88,20 @@ export function readNativeBlurGeometry(
       ],
       width,
       height,
-    ).map(([x, y]) => [x * scaleX, y * scaleY]) as Radii;
+    );
+    const radii = localRadii.map(([x, y]) => [x * scaleX, y * scaleY]) as Radii;
     if (isElement) {
-      clips.push({ x: rect.x, y: rect.y, width: rect.width, height: rect.height, radii });
+      if (projected) {
+        const originParts = style.transformOrigin.split(/\s+/).map(Number.parseFloat);
+        // z-origin and individual transform longhands are outside this first implementation.
+        if ((originParts[2] ?? 0) !== 0 || style.translate !== "none" || style.scale !== "none") return null;
+        const polygon = projectFlipOutline(width, height, localRadii, Array.from(projected.toFloat64Array()), [
+          originParts[0]!,
+          originParts[1]!,
+        ], rect);
+        if (!polygon) return null;
+        clips.push({ x: rect.x, y: rect.y, width: rect.width, height: rect.height, radii, polygon });
+      } else clips.push({ x: rect.x, y: rect.y, width: rect.width, height: rect.height, radii });
     }
     if (clipsOverflow && !isElement) {
       // Scrollbars and borders are excluded from the ancestor padding-box clip.

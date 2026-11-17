@@ -11,6 +11,10 @@ pub struct NativeBlurShape {
     pub height: f32,
     /// Elliptical corner radii, clockwise from top-left, normalized by CSS rules.
     pub radii: [[f32; 2]; 4],
+    /// Optional convex outline in viewport CSS coordinates, for opted-in hinge projection.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional))]
+    pub polygon: Option<Vec<[f32; 2]>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -36,4 +40,15 @@ pub struct NativeBlurOpacityAnimation {
     pub started_at_ms: f64,
     pub duration_ms: f32,
     pub values: Vec<f32>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(rename_all = "camelCase")]
+pub struct NativeBlurCloseAnimation {
+    pub region_id: u32,
+    pub scale: f32,
+    pub outlines: Vec<Vec<[f32; 2]>>,
+    pub opacity: NativeBlurOpacityAnimation,
 }

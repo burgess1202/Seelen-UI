@@ -4,6 +4,7 @@
   import { nativeWallpaperSource } from "../nativeWallpaperSource.svelte";
   import type { DefinedWallProps } from "../types";
   import { getWallpaperStyles } from "../utils";
+  import ThemedWallpaper from "./ThemedWallpaper.svelte";
 
   let { definition, config, onLoad }: DefinedWallProps = $props();
   onMount(() => nativeWallpaperSource.acquire());
@@ -19,6 +20,9 @@
     decoding="async"
     alt=""
   />
+{:else if nativeWallpaperSource.unavailable}
+  <!-- Solid color background or unreadable file: show the default wallpaper instead of nothing. -->
+  <ThemedWallpaper {onLoad} />
 {/if}
 
 <style>

@@ -217,14 +217,30 @@ impl WidgetPod {
         }
 
         self.set_status(WidgetStatus::Creating);
+        let creation_started = std::time::Instant::now();
+        super::native_blur::trace_webview_creation(
+            &self.label.raw,
+            "webview.create.begin",
+            creation_started,
+        );
         let window = match WidgetWebview::create(definition, &self.label, self.owner_hwnd) {
             Ok(window) => window,
             Err(err) => {
+                super::native_blur::trace_webview_creation(
+                    &self.label.raw,
+                    "webview.create.error",
+                    creation_started,
+                );
                 log::error!("Failed to create webview: {}", err);
                 self.set_status(WidgetStatus::CrashedOnCreation);
                 return;
             }
         };
+        super::native_blur::trace_webview_creation(
+            &self.label.raw,
+            "webview.create.end",
+            creation_started,
+        );
         self.set_status(WidgetStatus::Mounting);
 
         let label = self.label.clone();

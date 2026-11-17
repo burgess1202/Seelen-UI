@@ -103,6 +103,11 @@ export class Widget extends WidgetBasics {
 
   /** Will apply the recommended settings for a popup widget */
   private applyPopupPreset(): void {
+    if (!this.def.nativeBlurSwitch) {
+      this.preReadyTasks.push(getCurrentWebview().listen(SeelenEvent.WidgetNativeBlurClose, () => {
+        void this.hide();
+      }).then(() => {}));
+    }
     this.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) => {
       const toolbarToggle = customArgs?.__seelenToolbarToggle === true;
       if (toolbarToggle && this.toolbarTriggerInProgress) {

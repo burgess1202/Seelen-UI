@@ -5,7 +5,8 @@ use seelen_core::state::WorkspaceId;
 use seelen_core::{rect::Rect, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
 use std::sync::Arc;
-use std::sync::atomic::Ordering;
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::time::{Duration, Instant};
 use std::{
     fmt::{Debug, Display},
     path::PathBuf,
@@ -415,6 +416,59 @@ impl Window {
                 Err("Failed to set foreground window".into())
             }
         }
+    }
+
+    /// Unminimizes (if needed) and focuses this window as one user-requested switch (dock click,
+    /// task switcher, `Win+N`).
+    ///
+    /// Tauri commands run concurrently on the async runtime, so rapid clicks used to race: an
+    /// older request could restore/focus its window after a newer one, raising several windows.
+    /// Each call takes a generation and stops as soon as a newer switch supersedes it.
+    ///
+    /// Restoring an elevated window goes through the service asynchronously, so this waits for
+    /// the restore to land before focusing instead of letting `focus` silently skip it.
+    ///
+    /// Finally, the popup that triggered the switch (task switcher, dock) can hand activation
+    /// back to the previous window while it hides; if focus ended on one of our own windows (or
+    /// nowhere), focus is requested again. Focus taken by another app (the user) is left alone.
+    pub fn activate(&self) -> Result<()> {
+        static GENERATION: AtomicU64 = AtomicU64::new(0);
+        let generation = GENERATION.fetch_add(1, Ordering::SeqCst) + 1;
+        let superseded = || GENERATION.load(Ordering::SeqCst) != generation;
+
+        if self.is_minimized() {
+            self.show_window(SW_RESTORE)?;
+            let deadline = Instant::now() + Duration::from_millis(500);
+            while self.is_minimized() && Instant::now() < deadline {
+                if superseded() {
+                    return Ok(());
+                }
+                std::thread::sleep(Duration::from_millis(10));
+            }
+            if self.is_minimized() {
+                return Err("Window was not restored in time".into());
+            }
+        }
+
+        if superseded() {
+            return Ok(());
+        }
+        self.focus()?;
+
+        let own_pid = std::process::id();
+        for _ in 0..3 {
+            std::thread::sleep(Duration::from_millis(50));
+            if superseded() || self.is_focused() || !self.is_window() || self.is_minimized() {
+                return Ok(());
+            }
+            let foreground = Window::get_foregrounded();
+            let lost_to_us = foreground.hwnd().0.is_null() || foreground.process().id() == own_pid;
+            if !lost_to_us {
+                return Ok(());
+            }
+            self.focus()?;
+        }
+        Ok(())
     }
 
     pub fn is_dragging(&self) -> bool {

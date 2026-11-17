@@ -2,8 +2,13 @@
 
 import { invoke } from "@tauri-apps/api/core";
 import type { NativeBlurRegion } from "../../../gen/types/NativeBlurRegion.ts";
+import type { NativeBlurCloseAnimation } from "../../../gen/types/NativeBlurCloseAnimation.ts";
+import { readCloseOutlines } from "./nativeBlurCloseAnimation.ts";
+import { readNativeBlurMotion } from "./nativeBlurMotion.ts";
 import { readNativeBlurGeometry } from "./nativeBlurGeometry.ts";
 import { type OpacityPlan, readOpacityPlan } from "./nativeBlurAnimation.ts";
+import { NativeBlurLane } from "./nativeBlurLane.ts";
+import { nativeBlurEarlyExit, nativeBlurTraceEnabled, traceNativeBlur } from "./nativeBlurDiagnostics.ts";
 
 const ENABLE = "--slu-native-blur";
 const AMOUNT = "--slu-native-blur-amount";
@@ -16,6 +21,21 @@ interface Frame {
   visibilityEpoch: number;
   scale: number;
   regions: NativeBlurRegion[];
+  animateClose: boolean;
+  motion?: NativeBlurCloseAnimation;
+}
+
+interface VisibilityControl {
+  request: Promise<number>;
+  epoch: number;
+  visible: boolean;
+  deadlineMs: number;
+  closeAnimation?: NativeBlurCloseAnimation;
+}
+
+function usesAnimatedClose(style: CSSStyleDeclaration): boolean {
+  return style.getPropertyValue("--slu-native-blur-projection").trim() === "flip" &&
+    style.getPropertyValue("--slu-native-blur-close").trim() === "animate";
 }
 
 /** Shared by all Widget frameworks through startThemingTool; no theme-side JS required. */
@@ -26,9 +46,11 @@ export function startNativeBlurController(): NativeBlurController {
 }
 
 /** Native deadlines are armed independently of geometry IPC and never delay HWND hide. */
-export function beginNativeBlurClose(durationMs: number): number | undefined {
+export function beginNativeBlurClose(durationMs: number, startAnimation: () => void): number | undefined {
   const runtime = globalThis as typeof globalThis & { __SLU_NATIVE_BLUR_CONTROLLER__?: NativeBlurController };
-  return runtime.__SLU_NATIVE_BLUR_CONTROLLER__?.beginClose(durationMs);
+  const controller = runtime.__SLU_NATIVE_BLUR_CONTROLLER__;
+  if (controller) return controller.beginClose(durationMs, startAnimation);
+  startAnimation();
 }
 
 export function finishNativeBlurClose(epoch: number | undefined): void {
@@ -41,7 +63,15 @@ export function resumeNativeBlur(): void {
   runtime.__SLU_NATIVE_BLUR_CONTROLLER__?.resume();
 }
 
+export function nativeBlurContext(): Record<string, unknown> {
+  const runtime = globalThis as typeof globalThis & { __SLU_NATIVE_BLUR_CONTROLLER__?: NativeBlurController };
+  return runtime.__SLU_NATIVE_BLUR_CONTROLLER__?.timelineContext() ?? {};
+}
+
 class NativeBlurController {
+  timelineContext(): Record<string, unknown> {
+    return { session: this.session, epoch: this.visibilityEpoch, sequence: this.sequence };
+  }
   private ids = new WeakMap<HTMLElement, number>();
   private nextId = 1;
   private elements: HTMLElement[] = [];
@@ -58,10 +88,15 @@ class NativeBlurController {
   private visibilityEpoch = 0;
   private sequence = 0;
   private pending: Frame | undefined;
-  private sending: Promise<void> | undefined;
+  private geometryLane = new NativeBlurLane<Frame>((frame) => this.dispatch(frame), (error) => this.fail(error));
+  private visibilityLane = new NativeBlurLane<VisibilityControl>(
+    (control) => this.dispatchVisibility(control),
+    (error) => this.fail(error),
+  );
   private suspended = false;
   private plans = new WeakMap<HTMLElement, { plan: OpacityPlan; id: number }>();
   private nextAnimationId = 1;
+  private motion?: { animation: Animation; plan?: NativeBlurCloseAnimation; armed: boolean };
   private stopped = false;
   private failed = false;
   private propertiesSupported = false;
@@ -119,6 +154,12 @@ class NativeBlurController {
       ) return;
       this.discoverDirty = true;
       if (stylesChanged) this.selectorsDirty = true;
+      if (records.some((record) => record.attributeName === "data-slu-native-blur-motion" &&
+        record.target instanceof Element && record.target.hasAttribute("data-slu-native-blur-motion"))) {
+        this.cancelScheduledRead();
+        this.frame = requestAnimationFrame(this.read);
+        return;
+      }
       this.schedule();
     });
     this.mutationObserver.observe(document.documentElement, {
@@ -157,23 +198,68 @@ class NativeBlurController {
     this.discover();
   };
 
-  beginClose(durationMs: number): number {
-    const epoch = ++this.visibilityEpoch;
-    void this.requestVisibility(epoch, false, Date.now() + Math.max(0, Math.min(durationMs, 2000)));
+  beginClose(durationMs: number, startAnimation: () => void): number {
+    const epoch = this.advanceEpoch();
     this.cancelScheduledRead();
+    const animatedClose = this.elements.some((element) => usesAnimatedClose(getComputedStyle(element)));
+    if (nativeBlurEarlyExit() && !animatedClose) {
+      this.suspended = true;
+      this.pending = undefined;
+      this.lastSent = "";
+      for (const element of this.elements) element.removeAttribute(ELEMENT_STATUS);
+      this.status("idle");
+      this.requestVisibility(epoch, false, Date.now());
+      startAnimation();
+      return epoch;
+    }
+    const deadline = Date.now() + Math.max(0, Math.min(durationMs, 2000));
+    const element = animatedClose && this.elements.length === 1 ? this.elements[0] : undefined;
+    const regionId = element && this.ids.get(element);
+    let flat: ReturnType<typeof readNativeBlurGeometry>;
+    try {
+      flat = regionId && element ? readNativeBlurGeometry(element) : null;
+    } catch {
+      flat = null;
+    }
+    startAnimation();
+    let closeAnimation: NativeBlurCloseAnimation | undefined;
+    if (flat && element && regionId) {
+      try {
+        const opacity = readOpacityPlan(element);
+        const outlines = opacity && opacity.values.at(-1) === 0
+          ? readCloseOutlines(element, flat.clips[0]!, opacity.durationMs)
+          : undefined;
+        if (outlines && opacity) {
+          closeAnimation = {
+            regionId,
+            scale: devicePixelRatio,
+            outlines,
+            opacity: {
+              id: this.nextAnimationId++,
+              startedAtMs: opacity.startedAtMs,
+              durationMs: opacity.durationMs,
+              values: opacity.values,
+            },
+          };
+        }
+      } catch {
+        // Unsupported computed CSS falls back to the existing live geometry path.
+      }
+    }
+    this.requestVisibility(epoch, false, deadline, closeAnimation);
     // Capture the newly started CSS fade now, not at the next geometry polling interval.
     if (durationMs > 0 && (this.session !== undefined || this.sessionRequest)) this.read();
     return epoch;
   }
 
-  async hide(epoch?: number): Promise<void> {
-    epoch ??= ++this.visibilityEpoch;
+  hide(epoch?: number): void {
+    epoch ??= this.advanceEpoch();
     if (epoch !== this.visibilityEpoch) return;
     this.suspended = true;
     this.cancelScheduledRead();
     this.pending = undefined;
-    await this.requestVisibility(epoch, false, Date.now());
-    if (epoch !== this.visibilityEpoch) return;
+    this.geometryLane.clear();
+    this.requestVisibility(epoch, false, Date.now());
     for (const element of this.elements) {
       if (element.hasAttribute(ELEMENT_STATUS)) element.removeAttribute(ELEMENT_STATUS);
     }
@@ -182,34 +268,61 @@ class NativeBlurController {
   }
 
   resume(): void {
-    const epoch = ++this.visibilityEpoch;
+    const epoch = this.advanceEpoch();
+    this.failed = false;
     this.suspended = false;
+    this.lastSent = "";
     this.discoverDirty = true;
     this.plans = new WeakMap();
-    void this.requestVisibility(epoch, true, Date.now());
+    this.requestVisibility(epoch, true, Date.now());
     this.schedule();
   }
 
   private ensureSession(): Promise<number> {
     if (this.session !== undefined) return Promise.resolve(this.session);
+    if (!this.sessionRequest && nativeBlurTraceEnabled()) traceNativeBlur("session.begin.send", this.timelineContext());
     return this.sessionRequest ??= invoke<number>("begin_native_blur_session").then((session) => {
       this.session = session;
+      if (nativeBlurTraceEnabled()) traceNativeBlur("session.begin.ack", { session, requestId: `${session}:session` });
       return session;
     });
   }
 
-  private async requestVisibility(epoch: number, visible: boolean, deadlineMs: number): Promise<void> {
+  private advanceEpoch(): number {
+    const epoch = ++this.visibilityEpoch;
+    this.geometryLane.advance(epoch);
+    this.visibilityLane.advance(epoch);
+    this.pending = undefined;
+    this.motion = undefined;
+    return epoch;
+  }
+
+  private requestVisibility(epoch: number, visible: boolean, deadlineMs: number, closeAnimation?: NativeBlurCloseAnimation): void {
     // Do not allocate a native session/host for themes that never used native blur.
     const request = this.sessionRequest ?? (this.session === undefined ? undefined : Promise.resolve(this.session));
     if (!request) return;
-    try {
-      const session = await request;
-      if (epoch !== this.visibilityEpoch) return;
-      // Separate control lane: a slow geometry request must not hold the hide signal hostage.
-      await invoke("set_native_blur_visibility", { session, epoch, visible, deadlineMs });
-    } catch (error) {
-      if (!this.stopped && epoch === this.visibilityEpoch) this.fail(error);
+    this.visibilityLane.offer(epoch, { request, epoch, visible, deadlineMs, closeAnimation });
+  }
+
+  private async dispatchVisibility(control: VisibilityControl): Promise<void> {
+    const { request, epoch, visible, deadlineMs, closeAnimation } = control;
+    const session = await request;
+    if (epoch !== this.visibilityEpoch) return;
+    const requestId = nativeBlurTraceEnabled()
+      ? `${session}:visibility:${epoch}:${visible ? "open" : "close"}:${Math.round(deadlineMs)}`
+      : undefined;
+    if (requestId) traceNativeBlur("visibility.send", { requestId, session, epoch, visible, deadlineMs });
+    const armed = await invoke<boolean>("set_native_blur_visibility", { session, epoch, visible, deadlineMs, closeAnimation }).catch((error) => {
+      if (requestId) traceNativeBlur("visibility.error", { requestId, error: String(error) });
+      throw error;
+    });
+    if (armed && epoch === this.visibilityEpoch && session === this.session) {
+      this.suspended = true;
+      this.cancelScheduledRead();
+      this.pending = undefined;
+      this.geometryLane.clear();
     }
+    if (requestId) traceNativeBlur("visibility.ack", { requestId, session, epoch, visible });
   }
 
   private discover = (): void => {
@@ -238,7 +351,7 @@ class NativeBlurController {
     if (document.hidden) {
       this.cancelScheduledRead();
       this.pending = undefined;
-      void this.requestVisibility(++this.visibilityEpoch, false, Date.now());
+      this.requestVisibility(this.advanceEpoch(), false, Date.now());
     } else {
       if (!this.suspended) this.resume();
     }
@@ -321,15 +434,19 @@ class NativeBlurController {
         return style;
       };
       const regions: NativeBlurRegion[] = [];
+      let motion: NativeBlurCloseAnimation | undefined;
+      let animateClose = false;
       if (!document.hidden && !this.suspended) {
         for (const element of this.elements) {
           const amount = Number.parseFloat(readStyle(element).getPropertyValue(AMOUNT) || "18");
           if (!Number.isFinite(amount) || amount <= 0) continue;
           const geometry = readNativeBlurGeometry(element, readStyle);
           if (!geometry) continue;
+          animateClose ||= usesAnimatedClose(readStyle(element));
           if (!this.ids.has(element)) this.ids.set(element, this.nextId++);
           let cached = this.plans.get(element);
-          const candidate = readOpacityPlan(element, cached?.plan, readStyle);
+          const batchesMotion = element.hasAttribute("data-slu-native-blur-motion");
+          const candidate = readOpacityPlan(element, cached?.plan, readStyle, batchesMotion);
           if (!candidate) this.plans.delete(element);
           else if (candidate.key !== cached?.plan.key) {
             cached = { plan: candidate, id: this.nextAnimationId++ };
@@ -351,10 +468,34 @@ class NativeBlurController {
             opacity: opacityAnimation ? opacityAnimation.values[0]! : geometry.opacity,
             opacityAnimation,
           });
+          if (opacityAnimation && batchesMotion) {
+            const animation = element.getAnimations().find((item) =>
+              item.playState === "running" && typeof item.currentTime === "number" && typeof item.startTime === "number" &&
+              (item.effect as KeyframeEffect | null)?.target === element
+            );
+            if (animation && this.motion?.animation !== animation) {
+              this.motion = { animation, armed: false };
+              const finished = () => {
+                if (this.motion?.animation !== animation) return;
+                this.motion = undefined;
+                this.schedule();
+              };
+              void animation.finished.then(finished, finished);
+              try {
+                const outlines = readNativeBlurMotion(element, animation, opacityAnimation.durationMs);
+                if (outlines) {
+                  this.motion.plan = { regionId: this.ids.get(element)!, scale: devicePixelRatio, outlines, opacity: opacityAnimation };
+                }
+              } catch { /* Fall back to live geometry for unsupported CSS. */ }
+            }
+            if (animation && this.motion?.animation === animation) motion = this.motion.plan;
+          }
           if (regions.length === MAX_REGIONS) break;
         }
       }
-      this.pending = { visibilityEpoch: this.visibilityEpoch, scale: devicePixelRatio, regions };
+      if (regions.length !== 1 || motion?.scale !== devicePixelRatio) motion = undefined;
+      if (motion && this.motion?.armed) return;
+      this.pending = { visibilityEpoch: this.visibilityEpoch, scale: devicePixelRatio, regions, animateClose, motion };
       void this.send();
       // Follow only animations affecting an opted-in element or its ancestors.
       // There is no permanent render loop for static or unused themes.
@@ -370,36 +511,59 @@ class NativeBlurController {
     }
   };
 
-  private send(): Promise<void> {
-    return this.sending ??= this.drain().finally(() => {
-      this.sending = undefined;
-    });
+  private send(): void {
+    const frame = this.pending;
+    this.pending = undefined;
+    if (!frame || this.failed || this.stopped || this.suspended) return;
+    this.geometryLane.offer(frame.visibilityEpoch, frame);
+    if (nativeBlurTraceEnabled()) {
+      traceNativeBlur("geometry.queued", { ...this.timelineContext(), ...this.geometryLane.snapshot() });
+    }
   }
 
-  private async drain(): Promise<void> {
-    if (this.failed) return;
-    try {
-      while (this.pending) {
-        const frame = this.pending;
-        this.pending = undefined;
-        const key = JSON.stringify(frame);
-        if (key === this.lastSent || (!frame.regions.length && this.session === undefined)) continue;
-        const session = await this.ensureSession();
-        if (this.stopped || this.suspended || frame.visibilityEpoch !== this.visibilityEpoch) continue;
-        await invoke("sync_native_blur_regions", { session, sequence: ++this.sequence, ...frame });
-        if (this.stopped || this.suspended || frame.visibilityEpoch !== this.visibilityEpoch) continue;
-        this.lastSent = key;
-        const ids = new Set(frame.regions.map((region) => region.id));
-        for (const element of this.elements) {
-          if (ids.has(this.ids.get(element)!)) {
-            if (element.getAttribute(ELEMENT_STATUS) !== "ready") element.setAttribute(ELEMENT_STATUS, "ready");
-          } else if (element.hasAttribute(ELEMENT_STATUS)) element.removeAttribute(ELEMENT_STATUS);
-        }
-        this.status(frame.regions.length ? "ready" : "idle");
-      }
-    } catch (error) {
-      this.fail(error);
+  private async dispatch(frame: Frame): Promise<void> {
+    if (this.failed || this.stopped || this.suspended || frame.visibilityEpoch !== this.visibilityEpoch) return;
+    if (frame.motion && this.motion?.plan === frame.motion && this.motion.armed) return;
+    const key = JSON.stringify(frame);
+    if (key === this.lastSent || (!frame.regions.length && this.session === undefined)) return;
+    const session = await this.ensureSession();
+    if (this.stopped || this.suspended || frame.visibilityEpoch !== this.visibilityEpoch) return;
+    const sequence = ++this.sequence;
+    const requestId = nativeBlurTraceEnabled() ? `${session}:geometry:${sequence}:${frame.visibilityEpoch}` : undefined;
+    if (requestId) {
+      traceNativeBlur("geometry.send", {
+        requestId,
+        session,
+        sequence,
+        epoch: frame.visibilityEpoch,
+        regions: frame.regions.length,
+      });
     }
+    const armed = await invoke<boolean>("sync_native_blur_regions", { session, sequence, ...frame }).catch((error) => {
+      if (requestId) traceNativeBlur("geometry.error", { requestId, error: String(error) });
+      throw error;
+    });
+    if (requestId) traceNativeBlur("geometry.ack", { requestId, session, sequence, epoch: frame.visibilityEpoch });
+    if (this.stopped || this.suspended || frame.visibilityEpoch !== this.visibilityEpoch || session !== this.session) {
+      if (requestId) traceNativeBlur("geometry.obsolete.ack", { requestId, currentEpoch: this.visibilityEpoch });
+      return;
+    }
+    if (frame.motion && this.motion?.plan === frame.motion) {
+      if (armed) {
+        this.motion.armed = true;
+        this.cancelScheduledRead();
+      } else {
+        this.motion.plan = undefined;
+      }
+    }
+    this.lastSent = key;
+    const ids = new Set(frame.regions.map((region) => region.id));
+    for (const element of this.elements) {
+      if (ids.has(this.ids.get(element)!)) {
+        if (element.getAttribute(ELEMENT_STATUS) !== "ready") element.setAttribute(ELEMENT_STATUS, "ready");
+      } else if (element.hasAttribute(ELEMENT_STATUS)) element.removeAttribute(ELEMENT_STATUS);
+    }
+    this.status(frame.regions.length ? "ready" : "idle");
   }
 
   private status(value: string): void {
@@ -409,18 +573,14 @@ class NativeBlurController {
   }
 
   private fail(error: unknown): void {
+    if (this.failed || this.stopped) return;
     this.failed = true;
+    this.geometryLane.clear();
     this.pending = undefined;
     this.lastSent = "";
     for (const element of this.elements) element.removeAttribute(ELEMENT_STATUS);
     if (this.session !== undefined) {
-      void invoke("sync_native_blur_regions", {
-        session: this.session,
-        visibilityEpoch: ++this.visibilityEpoch,
-        sequence: ++this.sequence,
-        scale: devicePixelRatio,
-        regions: [],
-      }).catch(() => {});
+      this.requestVisibility(this.advanceEpoch(), false, Date.now());
     }
     this.session = undefined;
     this.sessionRequest = undefined;
@@ -455,6 +615,7 @@ class NativeBlurController {
     document.removeEventListener("load", this.refresh, true);
     globalThis.removeEventListener("resize", this.discover);
     this.pending = undefined;
-    void this.requestVisibility(++this.visibilityEpoch, false, Date.now());
+    this.geometryLane.clear();
+    this.requestVisibility(this.advanceEpoch(), false, Date.now());
   };
 }

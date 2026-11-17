@@ -62,6 +62,13 @@ impl WidgetWebview {
             .transparent(true)
             .visible(false);
 
+        // Initial script runs before any framework/SDK starts its document singleton.
+        builder = builder.initialization_script(format!(
+            "globalThis.__SLU_NATIVE_BLUR_TRACE__={};globalThis.__SLU_NATIVE_BLUR_EARLY_EXIT__={};globalThis.__SLU_NATIVE_BLUR_WINDOW__={:?};",
+            super::native_blur::diagnostics_enabled(), super::native_blur::early_exit_enabled(),
+            label.raw,
+        ));
+
         if matches!(
             widget.preset,
             WidgetPreset::Desktop | WidgetPreset::Overlay | WidgetPreset::Popup

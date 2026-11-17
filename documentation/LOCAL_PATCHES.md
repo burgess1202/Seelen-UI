@@ -1,18 +1,35 @@
 # 本機開發版修改與功能
 
-更新：2026-11-05。唯一開發入口為 `seelen-core/`，分支 `dev/aurora`。
+更新：2026-11-06。唯一開發入口為 `seelen-core/`，分支 `dev/aurora`。
 
-官方基底：v2.8.9，`507378aa01190617c18ee2c70ecc66b316169437`。這次保留原 nightly 所有本機修改，沒有升級到 v2.8.10，也沒有套入全部舊版補丁。
+目前已透過手動更新流程合併官方 v2.8.10（官方 SHA `ee71b9665507c41393dc4d95e452deb4581ac080`）；整合檢查點為 `690eca5ed14f7a434fa0062c01c1f3d73c2b7bc4`。遷移當時的 v2.8.9 本地修改仍保留，沒有套入全部舊版補丁。
+
+## 2026-11-06 原生模糊穩定性
+
+新增有界跨 epoch 傳輸，避免一個舊 geometry ACK 阻塞新 show；預設在 CSS 退場前送出 native 即時退出，不等待 ACK。提供預設關閉的時間軸及可回到舊退出政策的 A/B 旗標。維持 Windowed Hosting，不修改 Aurora 動畫。實作、測試、模型數據及限制見 [native-blur-stability-20261106.md](native-blur-stability-20261106.md)。GPU／DWM 實際呈現及肉眼改善仍待驗收。
+
+## 2026-11-06 原生桌布選取保留
+
+保護虛擬原生桌布不被一般資源卸載及收藏清理移除，並在目錄掃描前登錄，避免 hidden collection 失去桌布 ID 後只顯示 UUID。三項 Rust 回歸測試通過；舊空收藏需最後重新選取一次，實際重啟畫面待驗收。見 [native-wallpaper-persistence-20261106.md](native-wallpaper-persistence-20261106.md)。
+
+## 2026-11-14 原生桌布改為事件驅動（提 PR 前整理）
+
+- 新增 `src/background/modules/shell_wallpaper/`：由共用背景視窗的 `WM_SETTINGCHANGE` 和目前桌布資料夾的非遞迴監看觸發，單一 worker 重新讀取並比對，有實際變化才送出 `NativeShellWallpaperChanged`（`shell::native-wallpaper-changed`）。前端不再每 2.5 秒輪詢。
+- `GetNativeShellWallpaperSnapshot` 改由此模組提供，不再失敗（讀不到時回傳空路徑）。執行期以 `asset_protocol_scope().allow_file` 只放行目前那一個桌布檔，可支援無副檔名的 `TranscodedWallpaper` 和 `.bmp` 等，不放寬 `tauri.conf.json`。
+- React／Svelte 改為先訂閱再讀一次；以 generation 避免舊的初始結果蓋掉事件。純色背景或載入失敗時顯示預設桌布，並以 `console.error` 記錄。
+- 虛擬資源名稱與說明只保留英文（`ResourceText::En`），中文交給翻譯流程。
+- 驗證：`cargo check` 無警告；3 項 `native_wallpaper` 測試通過；SDK 已隔離重建；變更檔的 `tsc`、`svelte-check`、`deno fmt`／`lint` 通過（全專案型別檢查仍被既有 `nativeBlur.ts:49` 擋下）。實機切換桌布、Wallpaper Engine 覆寫及純色退回仍待驗收。
+- 未處理：多螢幕各自桌布（仍只讀 `SPI_GETDESKWALLPAPER` 單一路徑）、`Monitor.svelte` 強調色擷取未支援 `Native`。
 
 ## 現行本機功能
 
 | 功能 | 使用者可感知的行為／範圍 | 主要來源 | 限制與驗證狀態 |
 | --- | --- | --- | --- |
 | 主題可選原生背景模糊 | 主題以現有元素的 CSS 屬性指定原生模糊，支援區域、圓角、裁切、透明度及可見性同步 | `libs/core/src/state/theme/nativeBlur*.ts`、`native_blur.rs`；`src/background/widgets/native_blur*.rs`；MainSetup／theme bootstrap | Aurora 有使用接口；不是新增一個已驗收的通用設定開關。硬體、長時間使用、各動畫情境仍需實機確認 |
-| 模糊顯示／關閉生命週期 | 避免關閉動畫、重開與舊清理作業互相競速；原生資源跟隨可見性釋放 | widget `4_visibility.ts`、`hideAnimations.ts`、native blur visibility | 原工作區保留既有測試與效能紀錄；本次只做遷移與建置，不重跑完整 GPU／生命週期驗收 |
+| 模糊顯示／關閉生命週期 | 避免關閉動畫、重開與舊清理作業互相競速；原生資源跟隨可見性釋放 | widget `4_visibility.ts`、`hideAnimations.ts`、native blur visibility | 2026-11-06 已補有界通道、提前退出及回歸；GPU／DWM 與肉眼改善仍待驗收 |
 | 模糊效能優化 | 合併幾何更新、去重、限制在途請求、重用 brush／clip；暫停／hidden 時降低工作 | native blur controller／effect／performance | 詳見 `native-blur-performance.md`；既有 CPU 提交數據不能當作整體 GPU 使用率改善 |
 | 工具列重複點擊開關修正 | 同一 toolbar popup 再點一次明確關閉，並避免同一 toggle 重入 | `libs/core/src/state/widget/mod.ts`、toolbar `components/Evaluated/actionEvaluator.ts` | 與舊 toolbar PR 的兩個修改檔一致；這是小範圍修補，不是舊 Community 的完整動畫狀態機 |
-| 跟隨 Windows 靜態桌布 | 新 `WallpaperKind.Native` 與「目前的 Windows 桌布」資源；React／Svelte 可顯示目前 Windows 桌布，檔案被原地覆寫也可刷新 | `state/wallpaper/mod.rs`、resources、state infrastructure、React／Svelte NativeWallpaper | 跟隨靜態影像／快照，不是直接播放 Wallpaper Engine 動畫。Svelte 共用來源有使用者時每 2.5 秒更新；待實機確認選用入口與更新效果 |
+| 跟隨 Windows 靜態桌布 | 新 `WallpaperKind.Native` 與「目前的 Windows 桌布」資源；React／Svelte 可顯示目前 Windows 桌布，檔案被原地覆寫也可刷新 | `state/wallpaper/mod.rs`、resources、state infrastructure、React／Svelte NativeWallpaper | 跟隨靜態影像／快照，不是直接播放 Wallpaper Engine 動畫。2026-11-14 起改由後端事件通知，不再輪詢；待實機確認選用入口與更新效果 |
 | 原生服務不顯示主控台 | Windows 的 debug／release slu-service 均以無主控台模式執行；不再輸出到 stdout，Trace 與錯誤繼續寫檔 | `src/service/main.rs`、`src/service/logger.rs` | 使用者要求於 2026-11-05 新增；檔案記錄仍在 LocalAppData/com.seelen.seelen-ui/logs/SLU Service.log，保留原本輪替及 panic 記錄 |
 
 原生服務無主控台變更已通過 `cargo check --locked --offline -p seelen-ui --bin slu-service` 與同範圍 Debug build；新 `slu-service.exe` 的 PE Subsystem 核對為 2（Windows GUI），原本為 3（Console）。使用者正常退出後已替換執行檔，未擅自重啟桌面；從原有開發版捷徑開啟即可使用。此變更只針對服務，不變更主程式、前端常駐或 CLI 的顯示模式。
@@ -20,6 +37,12 @@
 命令包括 BeginNativeBlurSession、SyncNativeBlurRegions、SetNativeBlurVisibility、GetNativeShellWallpaperSnapshot。具體 API 以此 checkout 的宣告為準，不用官方參考碼較新的檔案代替。
 
 ## 本次整理新增的開發能力
+
+2026-11-06 工具列 popup 切換補充：先在 UI 執行緒清除舊 popup 的原生模糊，再啟動下一個面板；加上原生切換抑制及過期 toolbar trigger 保護，不讓舊 geometry／open 恢復已切走背景。詳見 [native-blur-popup-switch-20261106.md](native-blur-popup-switch-20261106.md)。實際畫面改善仍須新版實機驗收，不將 Composition API 完成視為 GPU 呈現完成。
+
+同日失焦路徑補充：本體 Popup 收到原生 foreground 變更後，先以可逆 opacity gate 隱藏模糊；保留前端 debounce，快速回焦可恢復，真正 close／switch 仍優先。只處理本體 Popup，不替第三方決定失焦行為。詳見 [native-blur-focus-loss-20261106.md](native-blur-focus-loss-20261106.md)。
+
+2026-11-07 Aurora 翻開動畫試作：主題明確 opt-in 後，支援單平面 X 軸投影輪廓裁切與有到期保護的一般退場模糊；失焦與工具列切換仍優先清除。SDK 已隔離重建；實機視覺待確認，詳見 [native-blur-flip-20261107.md](native-blur-flip-20261107.md)。
 
 - 獨立 Git repository 與固定路徑，不依賴舊 2.8.2 的 `.git`；原有歷史 refs 已保存。
 - 獨立本機 SDK junction，前端不借用舊來源。

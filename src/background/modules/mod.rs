@@ -8,6 +8,7 @@ pub mod network;
 pub mod notifications;
 pub mod power;
 pub mod radios;
+pub mod shell_wallpaper;
 pub mod start;
 pub mod system;
 pub mod system_settings;

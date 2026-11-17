@@ -1141,7 +1141,7 @@ impl crate::tauri_handlers::Handlers {
                     state.host.as_mut().unwrap().trace = trace.clone();
                     let host = state.host.as_mut().unwrap();
                     host.update(regions, scale)?;
-                    if let Some(plan) = motion.filter(|_| crate::utils::is_windows_11()) {
+                    if let Some(plan) = motion.filter(|_| crate::platform::info::is_windows_11()) {
                         match host.arm_region_path(plan) {
                             Ok(()) => {
                                 host.motion_id = Some(plan.opacity.id);
@@ -1235,7 +1235,7 @@ impl crate::tauri_handlers::Handlers {
                         signal_switch_close(&label, session);
                         return Err(error);
                     }
-                    if let Some(plan) = close_animation.as_ref().filter(|_| state.animate_close && !host.close_path_armed && crate::utils::is_windows_11()) {
+                    if let Some(plan) = close_animation.as_ref().filter(|_| state.animate_close && !host.close_path_armed && crate::platform::info::is_windows_11()) {
                         match host.arm_region_path(plan) {
                             Ok(()) => {
                                 host.close_path_armed = true;
@@ -1364,7 +1364,7 @@ mod tests {
 
     #[test]
     fn projected_close_path_submits_keyframes_to_geometric_clip() {
-        if !crate::utils::is_windows_11() {
+        if !crate::platform::info::is_windows_11() {
             return;
         }
         ensure_dispatcher().unwrap();

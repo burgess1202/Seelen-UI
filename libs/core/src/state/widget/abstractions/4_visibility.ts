@@ -45,8 +45,37 @@ export class Widget_4 extends Widget_3 {
     }).catch((error) => traceNativeBlur(`${stage}.hwnd.query.error`, { ...detail, error: String(error) }));
   }
 
+  protected _visible = false;
+
+  /**
+   * Cached visibility, updated synchronously on `show()`/`hide()` calls (a hide in progress counts as hidden).
+   * Windows shown/hidden directly via `window.show()`/`window.hide()` are not tracked.
+   */
+  public get visible(): boolean {
+    return this._visible;
+  }
+
+  private _visibilitySubs = new Set<(visible: boolean) => void>();
+  /**
+   * Called synchronously when `show()`/`hide()` change the cached visibility, before the hide
+   * animation plays (so the widget can follow it).
+   */
+  public onVisibilityChange(cb: (visible: boolean) => void): () => void {
+    this._visibilitySubs.add(cb);
+    return () => {
+      this._visibilitySubs.delete(cb);
+    };
+  }
+
+  private setVisible(visible: boolean): void {
+    if (this._visible === visible) return;
+    this._visible = visible;
+    this._visibilitySubs.forEach((cb) => cb(visible));
+  }
+
   public async show(): Promise<void> {
     const token = ++this._visibilityToken;
+    this.setVisible(true);
     debouncedClose.cancel();
     resumeNativeBlur();
     this.traceVisibility("widget.show.call", token);
@@ -61,6 +90,9 @@ export class Widget_4 extends Widget_3 {
   public hide(): Promise<void> {
     if (this._hideOperation?.token === this._visibilityToken) return this._hideOperation.promise;
     const token = ++this._visibilityToken;
+    // Cached visibility flips before the hide animation (upstream contract); the
+    // `widgetHidden` attribute is still owned by the native blur close sequence.
+    this.setVisible(false);
     const promise = this.performHide(token).finally(() => {
       if (this._hideOperation?.token === token) this._hideOperation = undefined;
     });

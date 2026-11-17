@@ -382,6 +382,10 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         set_self_z_order(z_order: ZOrder),
+    RequestFocus =
+        @webview()
+        @fallible()
+        request_focus(),
     WriteFile =
         @webview()
         @fallible()
@@ -415,6 +419,14 @@ slu_commands_declaration! {
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
     GetUserAppWindowsPreviews = get_user_app_windows_previews() -> std::collections::HashMap<isize, UserAppWindowPreview>,
     GetUserAppWindowsColors = get_user_app_windows_colors() -> std::collections::HashMap<isize, UserAppWindowColors>,
+    UpdateWindowPreviews =
+        @webview()
+        @fallible()
+        update_window_previews(session: String, targets: Vec<WindowPreviewTarget>, opacity: u8) -> LiveWindowPreviewState,
+    ClearWindowPreviews =
+        @webview()
+        @fallible()
+        clear_window_previews(session: String),
 
     // Media
     GetMediaDevices =
@@ -509,10 +521,6 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         set_app_windows_positions(positions: std::collections::HashMap<isize, Rect>),
-    RequestFocus =
-        @webview()
-        @fallible()
-        request_focus(hwnd: isize),
     WmSetStackActiveWindow =
         @webview()
         @fallible()

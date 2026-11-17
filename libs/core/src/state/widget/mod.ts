@@ -63,8 +63,6 @@ export class Widget extends WidgetBasics {
     ready: false,
   };
 
-  private toolbarTriggerInProgress = false;
-
   private constructor(widget: IWidget) {
     super();
 
@@ -122,58 +120,41 @@ export class Widget extends WidgetBasics {
       if (!visible) hoverDismissal.stop();
     });
 
-    this.onTrigger(async ({ desiredPosition, alignX, alignY, source, anchorRect, customArgs }) => {
+    this.onTrigger(async ({ desiredPosition, alignX, alignY, source, anchorRect }) => {
       const hover = source === TriggerSource.Hover;
-      const toolbarToggle = customArgs?.__seelenToolbarToggle === true;
-      if (toolbarToggle && this.toolbarTriggerInProgress) {
+      // Hovering again (e.g. another anchor) updates the popup instead of closing it.
+      if (toggleOnTrigger && !hover && this.visible) {
+        await this.hide();
         return;
       }
 
-      if (toolbarToggle) {
-        this.toolbarTriggerInProgress = true;
+      if (desiredPosition) {
+        await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
-      try {
-        // A second click on the same toolbar item is an explicit close. Do not
-        // show/focus the popup again and race its focus-loss hide handler.
-        // Hovering again (e.g. another anchor) updates the popup instead of closing it.
-        const explicitToggle = toolbarToggle && await this.window.isVisible();
-        if (explicitToggle || (toggleOnTrigger && !hover && this.visible)) {
-          await this.hide();
-          return;
-        }
 
-        if (desiredPosition) {
-          await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
-        }
+      // On Windows `show()` also activates a focusable window: a hovered popup must leave the focus
+      // where it is, so the user can keep typing in their app.
+      if (focusable === hover) {
+        focusable = !hover;
+        await this.window.setFocusable(focusable);
+      }
+      await this.show();
 
-        // On Windows `show()` also activates a focusable window: a hovered popup must leave the focus
-        // where it is, so the user can keep typing in their app.
-        if (focusable === hover) {
-          focusable = !hover;
-          await this.window.setFocusable(focusable);
-        }
-        await this.show();
+      if (hover) {
+        hoverDismissal.start(anchorRect ?? null);
+      } else {
+        hoverDismissal.stop();
+        await this.focus();
+      }
 
-        if (hover) {
-          hoverDismissal.start(anchorRect ?? null);
-        } else {
-          hoverDismissal.stop();
-          await this.focus();
-        }
-
-        // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
-        // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
-        // can arrive before the trigger fires and roll back the optimistic size to an intermediate
-        // value. If the trigger then repositions with that stale size its SetSelfPosition call
-        // lands in the Win32 queue after the correct resize, overwriting it. Running execute()
-        // here detects the remaining diff and issues a corrective resize + position adjustment.
-        if (this.autoSize.enabled) {
-          await this.executeAutoSize();
-        }
-      } finally {
-        if (toolbarToggle) {
-          this.toolbarTriggerInProgress = false;
-        }
+      // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
+      // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
+      // can arrive before the trigger fires and roll back the optimistic size to an intermediate
+      // value. If the trigger then repositions with that stale size its SetSelfPosition call
+      // lands in the Win32 queue after the correct resize, overwriting it. Running execute()
+      // here detects the remaining diff and issues a corrective resize + position adjustment.
+      if (this.autoSize.enabled) {
+        await this.executeAutoSize();
       }
     });
   }

@@ -17,7 +17,7 @@
         "src/background/widgets/native_blur_effect.rs",
         "src/background/widgets/native_blur_performance.rs",
         "src/background/widgets/native_blur_visibility.rs",
-        "src/background/widgets/webview.rs",
+        "src/background/widgets/webview/mod.rs",
         "src/ui/vanilla/entry-point/MainSetup.ts",
         "libs/core/src/state/theme/nativeBlurLane.ts",
         "libs/core/src/state/theme/nativeBlurDiagnostics.ts",
@@ -27,29 +27,17 @@
         "scripts/native-blur-stability-tests.mjs",
         "src/background/widgets/mod.rs",
         "src/background/widgets/loader.rs",
-        "src/background/hook.rs",
+        "src/background/platform/hook/windows/mod.rs",
         "src/background/widgets/native_blur_focus.rs",
         "libs/core/src/state/theme/nativeBlurProjection.ts",
         "libs/core/src/state/theme/nativeBlurProjection.test.ts",
-        "scripts/native-blur-flip-tests.mjs"
-      ],
-      "validation": {
-        "sourceHash": "4d6f3e6000227d3f7ac36d953cd8a3155e3fedb1399fc0883b336161b0095511",
-        "summary": "2026-11-07 flip：TS 18、native Rust 19（2 ignored）、browser 新增 8／既有 7+14、SDK bindings 83 及 SDK/Debug 建置通過；實機待解鎖驗收",
-        "visual": "pending"
-      }
-    },
-    {
-      "id": "toolbar-toggle",
-      "name": "工具列再次點擊關閉",
-      "pr": 1916,
-      "files": [
+        "scripts/native-blur-flip-tests.mjs",
         "libs/core/src/state/widget/mod.ts",
         "src/ui/svelte/fancy-toolbar/components/Evaluated/actionEvaluator.ts"
       ],
       "validation": {
-        "sourceHash": "f4b490d27572617fea0d481ac51726fecfb3c5236e39116f189a80ca2019f5e8",
-        "summary": "2026-11-05 前端／Debug 建置通過",
+        "sourceHash": "4d6f3e6000227d3f7ac36d953cd8a3155e3fedb1399fc0883b336161b0095511",
+        "summary": "2026-11-07 flip：TS 18、native Rust 19（2 ignored）、browser 新增 8／既有 7+14、SDK bindings 83 及 SDK/Debug 建置通過；實機待解鎖驗收",
         "visual": "pending"
       }
     },
@@ -60,16 +48,16 @@
       "files": [
         "libs/core/src/state/wallpaper/mod.rs",
         "src/background/resources/mod.rs",
-        "src/background/state/infrastructure.rs",
+        "src/background/state/mod.rs",
         "libs/ui/react/components/Wallpaper/index.tsx",
         "libs/ui/react/components/Wallpaper/components/NativeWallpaper.tsx",
         "libs/ui/svelte/components/Wallpaper/Wallpaper.svelte",
         "libs/ui/svelte/components/Wallpaper/components/NativeWallpaper.svelte",
         "libs/ui/svelte/components/Wallpaper/nativeWallpaperSource.svelte.ts",
         "src/background/state/application/settings.rs",
-        "src/background/modules/shell_wallpaper/mod.rs",
-        "src/background/modules/shell_wallpaper/application.rs",
-        "src/background/modules/shell_wallpaper/infrastructure.rs"
+        "src/background/system_modules/shell_wallpaper/mod.rs",
+        "src/background/system_modules/shell_wallpaper/application.rs",
+        "src/background/system_modules/shell_wallpaper/infrastructure.rs"
       ],
       "validation": {
         "sourceHash": "d61fb5cf28770a7fe1498a41653f1cff8fd58e9cd0d9227b05302e9201620b43",

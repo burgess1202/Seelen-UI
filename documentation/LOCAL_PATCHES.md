@@ -1,8 +1,8 @@
 # 本機開發版修改與功能
 
-更新：2026-11-06。唯一開發入口為 `seelen-core/`，分支 `dev/aurora`。
+更新：2026-11-17。唯一開發入口為 `seelen-core/`，分支 `dev/aurora`。
 
-目前已透過手動更新流程合併官方 v2.8.10（官方 SHA `ee71b9665507c41393dc4d95e452deb4581ac080`）；整合檢查點為 `690eca5ed14f7a434fa0062c01c1f3d73c2b7bc4`。遷移當時的 v2.8.9 本地修改仍保留，沒有套入全部舊版補丁。
+目前已透過手動更新流程合併官方 v2.8.11（官方 SHA `99e09bc8ceaf859b0bc6cb47587e9cee26283dc0`）；合併 commit 為 `b0bf4e4a`。官方把後端搬到 `platform/` 與 `system_modules/`，本機補丁已隨之移位：失焦模糊通知在 `platform/hook/windows/mod.rs`，`Window::activate` 在 `platform/window/mod.rs`，原生桌布模組在 `system_modules/shell_wallpaper/`。遷移當時的 v2.8.9 本地修改仍保留，沒有套入全部舊版補丁。
 
 ## 2026-11-06 原生模糊穩定性
 
@@ -28,7 +28,7 @@
 | 主題可選原生背景模糊 | 主題以現有元素的 CSS 屬性指定原生模糊，支援區域、圓角、裁切、透明度及可見性同步 | `libs/core/src/state/theme/nativeBlur*.ts`、`native_blur.rs`；`src/background/widgets/native_blur*.rs`；MainSetup／theme bootstrap | Aurora 有使用接口；不是新增一個已驗收的通用設定開關。硬體、長時間使用、各動畫情境仍需實機確認 |
 | 模糊顯示／關閉生命週期 | 避免關閉動畫、重開與舊清理作業互相競速；原生資源跟隨可見性釋放 | widget `4_visibility.ts`、`hideAnimations.ts`、native blur visibility | 2026-11-06 已補有界通道、提前退出及回歸；GPU／DWM 與肉眼改善仍待驗收 |
 | 模糊效能優化 | 合併幾何更新、去重、限制在途請求、重用 brush／clip；暫停／hidden 時降低工作 | native blur controller／effect／performance | 詳見 `native-blur-performance.md`；既有 CPU 提交數據不能當作整體 GPU 使用率改善 |
-| 工具列重複點擊開關修正 | 同一 toolbar popup 再點一次明確關閉，並避免同一 toggle 重入 | `libs/core/src/state/widget/mod.ts`、toolbar `components/Evaluated/actionEvaluator.ts` | 與舊 toolbar PR 的兩個修改檔一致；這是小範圍修補，不是舊 Community 的完整動畫狀態機 |
+| 工具列 popup 切換旗標 | 工具列觸發 popup 時帶 `__seelenToolbarToggle`，讓後端先清除其他 popup 的原生模糊再開啟目標 | toolbar `components/Evaluated/actionEvaluator.ts`、`src/background/widgets/mod.rs` | 2026-11-17 起「再點一次關閉」改用官方 v2.8.11 `toggleOnTrigger`（取代 PR 1916），本機前端關閉／重入判斷已移除；旗標只供原生模糊切換使用，歸入原生模糊補丁 |
 | 跟隨 Windows 靜態桌布 | 新 `WallpaperKind.Native` 與「目前的 Windows 桌布」資源；React／Svelte 可顯示目前 Windows 桌布，檔案被原地覆寫也可刷新 | `state/wallpaper/mod.rs`、resources、state infrastructure、React／Svelte NativeWallpaper | 跟隨靜態影像／快照，不是直接播放 Wallpaper Engine 動畫。2026-11-14 起改由後端事件通知，不再輪詢；待實機確認選用入口與更新效果 |
 | 原生服務不顯示主控台 | Windows 的 debug／release slu-service 均以無主控台模式執行；不再輸出到 stdout，Trace 與錯誤繼續寫檔 | `src/service/main.rs`、`src/service/logger.rs` | 使用者要求於 2026-11-05 新增；檔案記錄仍在 LocalAppData/com.seelen.seelen-ui/logs/SLU Service.log，保留原本輪替及 panic 記錄 |
 

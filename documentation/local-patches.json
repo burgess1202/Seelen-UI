@@ -64,8 +64,8 @@
         "libs/core/src/handlers/events.rs"
       ],
       "validation": {
-        "sourceHash": "edc30aedb2ee68ac15078e823697e511efd88afa387f042f9eb689345da7ab0c",
-        "summary": "2026-11-18 改用 PR 版（feat/native-wallpaper 67a9af3e）；6 項 Rust 測試、cargo 零警告、SDK 隔離重建、tsc／svelte-check（僅既有 nativeBlur.ts:49）通過",
+        "sourceHash": "a1a48741b59f11fb439a2a0b5842bc4366ab6aef13f6c4c3d73aa8c74c09e099",
+        "summary": "2026-11-18 PR 版加焦點修正（feat/native-wallpaper bc2a7595）；6 項 Rust 測試、cargo 零警告通過；實機 QA 除焦點直接切回圖片待重測外皆通過，多螢幕未測",
         "visual": "pending"
       }
     },

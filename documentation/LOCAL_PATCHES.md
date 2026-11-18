@@ -27,7 +27,9 @@
 - 後端改為官方 system module 分層：`shell_wallpaper/mod.rs`（Tauri 命令與事件橋接）、`domain.rs`（`ShellWallpaperSystem` trait）、`application/mod.rs`（跨平台 manager）、`application/windows.rs`（`WM_SETTINGCHANGE` 與資料夾監看）。舊的 `application.rs`／`infrastructure.rs` 已移除。
 - SDK 命令與事件的資料由 tuple 改為具名的 `NativeWallpaperSnapshot { path, revision }`，命令與事件名稱不變；SDK 已以 `npm run build:lib` 隔離重建。
 - Svelte 改為模組層級 state，由 class getter 對外提供。測試模組改名為 `tests`。
-- 驗證狀態見 `local-patches.json` 的 `native-wallpaper` 項目；實機 QA 仍待執行。
+- 驗證狀態見 `local-patches.json` 的 `native-wallpaper` 項目。
+- 同日實機 QA（Windows 11 26200）：換圖、幻燈片、焦點、純色、純色改回圖片、Wallpaper Engine 覆寫、重啟保留、與一般桌布互切皆正常；多螢幕未測。唯一失敗是「焦點直接切回圖片」偵測不到：當時只監看焦點素材資料夾，而 Windows 把新圖寫到 `%APPDATA%\Microsoft\Windows\Themes`。
+- 修正（PR 分支 commit `bc2a7595`，已同步）：`application/windows.rs` 常駐監看 Themes 資料夾，資料夾比對改為不分大小寫，避免同一路徑大小寫不同時重建監看。焦點直接切回圖片待重測。
 
 ## 現行本機功能
 

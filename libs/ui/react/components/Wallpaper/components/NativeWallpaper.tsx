@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import type { NativeWallpaperSnapshot } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { useEffect, useState } from "preact/hooks";
 
@@ -19,7 +20,7 @@ export function NativeWallpaper({ definition, config, onLoad }: DefinedWallProps
     // Bumped by every applied snapshot, so a stale initial fetch never overrides an event.
     let generation = 0;
 
-    function apply(path: string, revision: number) {
+    function apply({ path, revision }: NativeWallpaperSnapshot) {
       if (cancelled) return;
       generation += 1;
 
@@ -54,12 +55,12 @@ export function NativeWallpaper({ definition, config, onLoad }: DefinedWallProps
 
     // Listen first: an event may arrive while the initial snapshot is in flight.
     const unlisten = subscribe(SeelenEvent.NativeShellWallpaperChanged, ({ payload }) => {
-      apply(payload[0], payload[1]);
+      apply(payload);
     });
     const initialGeneration = generation;
     invoke(SeelenCommand.GetNativeShellWallpaperSnapshot)
-      .then(([path, revision]) => {
-        if (generation === initialGeneration) apply(path, revision);
+      .then((snapshot) => {
+        if (generation === initialGeneration) apply(snapshot);
       })
       .catch((error) => console.error("Failed to read the Windows wallpaper", error));
 

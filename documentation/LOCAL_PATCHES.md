@@ -14,12 +14,20 @@
 
 ## 2026-11-14 原生桌布改為事件驅動（提 PR 前整理）
 
-- 新增 `src/background/modules/shell_wallpaper/`：由共用背景視窗的 `WM_SETTINGCHANGE` 和目前桌布資料夾的非遞迴監看觸發，單一 worker 重新讀取並比對，有實際變化才送出 `NativeShellWallpaperChanged`（`shell::native-wallpaper-changed`）。前端不再每 2.5 秒輪詢。
+- 新增 `src/background/modules/shell_wallpaper/`（現位於 `system_modules/shell_wallpaper/`）：由共用背景視窗的 `WM_SETTINGCHANGE` 和目前桌布資料夾的非遞迴監看觸發，單一 worker 重新讀取並比對，有實際變化才送出 `NativeShellWallpaperChanged`（`shell::native-wallpaper-changed`）。前端不再每 2.5 秒輪詢。
 - `GetNativeShellWallpaperSnapshot` 改由此模組提供，不再失敗（讀不到時回傳空路徑）。執行期以 `asset_protocol_scope().allow_file` 只放行目前那一個桌布檔，可支援無副檔名的 `TranscodedWallpaper` 和 `.bmp` 等，不放寬 `tauri.conf.json`。
 - React／Svelte 改為先訂閱再讀一次；以 generation 避免舊的初始結果蓋掉事件。純色背景或載入失敗時顯示預設桌布，並以 `console.error` 記錄。
 - 虛擬資源名稱與說明只保留英文（`ResourceText::En`），中文交給翻譯流程。
 - 驗證：`cargo check` 無警告；3 項 `native_wallpaper` 測試通過；SDK 已隔離重建；變更檔的 `tsc`、`svelte-check`、`deno fmt`／`lint` 通過（全專案型別檢查仍被既有 `nativeBlur.ts:49` 擋下）。實機切換桌布、Wallpaper Engine 覆寫及純色退回仍待驗收。
 - 未處理：多螢幕各自桌布（仍只讀 `SPI_GETDESKWALLPAPER` 單一路徑）、`Monitor.svelte` 強調色擷取未支援 `Native`。
+
+## 2026-11-18 原生桌布改用 PR 版實作
+
+- 官方 PR 候選分支 `feat/native-wallpaper`（commit `67a9af3e`，基於官方 `690bb8ef`）的寫法已套回本分支，兩邊桌布程式碼一致，方便實機 QA 直接驗證 PR 內容。
+- 後端改為官方 system module 分層：`shell_wallpaper/mod.rs`（Tauri 命令與事件橋接）、`domain.rs`（`ShellWallpaperSystem` trait）、`application/mod.rs`（跨平台 manager）、`application/windows.rs`（`WM_SETTINGCHANGE` 與資料夾監看）。舊的 `application.rs`／`infrastructure.rs` 已移除。
+- SDK 命令與事件的資料由 tuple 改為具名的 `NativeWallpaperSnapshot { path, revision }`，命令與事件名稱不變；SDK 已以 `npm run build:lib` 隔離重建。
+- Svelte 改為模組層級 state，由 class getter 對外提供。測試模組改名為 `tests`。
+- 驗證狀態見 `local-patches.json` 的 `native-wallpaper` 項目；實機 QA 仍待執行。
 
 ## 現行本機功能
 

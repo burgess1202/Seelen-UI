@@ -418,7 +418,7 @@ unsafe impl Send for ResourceManager {}
 unsafe impl Sync for ResourceManager {}
 
 #[cfg(test)]
-mod native_wallpaper_tests {
+mod tests {
     use super::*;
 
     #[test]

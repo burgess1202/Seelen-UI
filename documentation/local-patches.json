@@ -55,13 +55,17 @@
         "libs/ui/svelte/components/Wallpaper/components/NativeWallpaper.svelte",
         "libs/ui/svelte/components/Wallpaper/nativeWallpaperSource.svelte.ts",
         "src/background/state/application/settings.rs",
+        "src/background/system_modules/mod.rs",
         "src/background/system_modules/shell_wallpaper/mod.rs",
-        "src/background/system_modules/shell_wallpaper/application.rs",
-        "src/background/system_modules/shell_wallpaper/infrastructure.rs"
+        "src/background/system_modules/shell_wallpaper/domain.rs",
+        "src/background/system_modules/shell_wallpaper/application/mod.rs",
+        "src/background/system_modules/shell_wallpaper/application/windows.rs",
+        "libs/core/src/handlers/commands.rs",
+        "libs/core/src/handlers/events.rs"
       ],
       "validation": {
-        "sourceHash": "d61fb5cf28770a7fe1498a41653f1cff8fd58e9cd0d9227b05302e9201620b43",
-        "summary": "2026-11-06 原生桌布持久化 3 項回歸與 Debug 建置通過；已重新啟動開發版",
+        "sourceHash": "edc30aedb2ee68ac15078e823697e511efd88afa387f042f9eb689345da7ab0c",
+        "summary": "2026-11-18 改用 PR 版（feat/native-wallpaper 67a9af3e）；6 項 Rust 測試、cargo 零警告、SDK 隔離重建、tsc／svelte-check（僅既有 nativeBlur.ts:49）通過",
         "visual": "pending"
       }
     },

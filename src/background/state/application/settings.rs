@@ -178,7 +178,7 @@ fn show_corrupted_state_to_user(path: &Path) {
 }
 
 #[cfg(test)]
-mod native_wallpaper_tests {
+mod tests {
     use super::*;
     use seelen_core::{
         resource::WallpaperId,

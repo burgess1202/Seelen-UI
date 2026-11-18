@@ -406,8 +406,7 @@ slu_commands_declaration! {
     GetNativeShellWallpaper =
         @fallible()
         get_native_shell_wallpaper() -> std::path::PathBuf,
-    GetNativeShellWallpaperSnapshot =
-        get_native_shell_wallpaper_snapshot() -> (std::path::PathBuf, u64),
+    GetNativeShellWallpaperSnapshot = get_native_shell_wallpaper_snapshot() -> NativeWallpaperSnapshot,
     SetNativeShellWallpaper =
         @webview()
         @fallible()

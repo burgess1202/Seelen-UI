@@ -2,7 +2,7 @@
 
 ## Local workspace entry (2026-11-05)
 
-- This is the only active core development checkout, based on official v2.8.9 with preserved local changes. Branch: `dev/aurora`.
+- This is the only active core development checkout, based on official v2.8.11 with preserved local changes. Branch: `dev/local` (fork `origin/dev/local`; fork `master` mirrors the official release it is based on).
 - Read `documentation/LOCAL_PATCHES.md` and `../docs/DEVELOPMENT_WORKFLOW.md` for local capabilities and operations.
 - The root `../seelen-dev.cmd` and `../tools/seelen-dev.ps1` provide the local workflow. Generated binaries use the `target-dir` in `.cargo/config.toml`.
 - `../seelen-reference/` is clean official v2.8.10 reference; it is not this host's exact source. Legacy projects in `../archives/` are not active dependencies.

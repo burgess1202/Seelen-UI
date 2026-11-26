@@ -1,6 +1,6 @@
 # 本機開發版修改與功能
 
-更新：2026-11-17。唯一開發入口為 `seelen-core/`，分支 `dev/aurora`。
+更新：2026-11-17。唯一開發入口為 `seelen-core/`，分支 `dev/local`（2026-11-26 由 `dev/aurora` 改名；fork 的 `master` 對應目前合併的官方版本）。
 
 目前已透過手動更新流程合併官方 v2.8.11（官方 SHA `99e09bc8ceaf859b0bc6cb47587e9cee26283dc0`）；合併 commit 為 `b0bf4e4a`。官方把後端搬到 `platform/` 與 `system_modules/`，本機補丁已隨之移位：失焦模糊通知在 `platform/hook/windows/mod.rs`，`Window::activate` 在 `platform/window/mod.rs`，原生桌布模組在 `system_modules/shell_wallpaper/`。遷移當時的 v2.8.9 本地修改仍保留，沒有套入全部舊版補丁。
 
